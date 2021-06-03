@@ -1,0 +1,9 @@
+version: '3'
+services:
+  apache:
+    image: 'lobmax/my_php:latest'
+    container_name: jaguar
+    ports:
+      - '80:80'
+    volumes:
+      - .:/var/www/html
