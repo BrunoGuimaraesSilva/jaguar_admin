@@ -112,4 +112,3 @@
             history.back();
         })
     </script>
-    <?php

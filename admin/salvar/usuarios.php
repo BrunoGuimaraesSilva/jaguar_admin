@@ -64,7 +64,7 @@ if ($_POST) {
                 $f
             WHERE id = :id 
         ";
-        
+
         $consulta = $pdo->prepare($sql);
         $consulta->bindParam(":nome", $nome);
         $consulta->bindParam(":email", $email);
