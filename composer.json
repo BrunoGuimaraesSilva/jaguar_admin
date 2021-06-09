@@ -1,0 +1,14 @@
+{
+    "name": "jaguar/jaguar",
+    "description": "Jaguar admin and website",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bruno Guimarães da Silva",
+            "email": "bruno.sil16441@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.0"
+    }
+}

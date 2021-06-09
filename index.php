@@ -1,20 +1,24 @@
 <?php
-  session_start(); //iniciando uma sessão
+session_start(); //iniciando uma sessão
 
-	//incluir o arquivo de conexao com o banco
-	require "config/conexao.php";
+//incluir o arquivo de conexao com o banco
+require "utils/index.php";
+
+
+$get_data = callAPI('GET', 'http://192.168.8.157:8080/api/login', false);
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Jaguar Motors</title>
 	<meta charset="utf-8">
 
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/all.min.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/lightbox.min.css">
-	<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/lightbox.min.css">
+  <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
 
   <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="js/popper.min.js"></script>
@@ -22,6 +26,7 @@
   <script type="text/javascript" src="js/lightbox.js"></script>
   <script type="text/javascript" src="js/parsley.min.js"></script>
 </head>
+
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container text-center">
@@ -128,4 +133,5 @@
   </div>
 </footer>
 </body>
+
 </html>
