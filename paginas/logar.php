@@ -19,9 +19,7 @@
 			exit;
 		}
 
-		$sql = "select id, nome, email, senha 
-			from cliente 
-			where email = '{$email}' limit 1";
+		$sql = "select id, nome, email, senha from cliente where email = '{$email}' limit 1";
 		$resultado = mysqli_query( $con, $sql );
 		$dados = mysqli_fetch_array( $resultado );
 

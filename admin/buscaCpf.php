@@ -3,7 +3,7 @@
 	session_start();
 
 	//verificar se esta logado
-    if ( ! isset ( $_SESSION['submarino']['id'] ) ) exit;
+    if ( ! isset ( $_SESSION['jaguar']['id'] ) ) exit;
 
     //recuperar os dados
     $id = trim ( $_POST["id"] ?? NULL );

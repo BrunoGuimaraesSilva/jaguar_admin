@@ -1,5 +1,5 @@
 <?php
-    if ( ! isset ( $_SESSION['submarino']['id'] ) ) exit;
+    if ( ! isset ( $_SESSION['jaguar']['id'] ) ) exit;
 
     $produto = $descricao = $valor = $promo = $imagem = $ativo = $categoria_id = NULL;
 

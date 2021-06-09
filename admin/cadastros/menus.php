@@ -1,5 +1,5 @@
 <?php
-    if ( ! isset ( $_SESSION['submarino']['id'] ) ) exit;
+    if ( ! isset ( $_SESSION['jaguar']['id'] ) ) exit;
 
     $tabela = "menus";
 
@@ -76,7 +76,6 @@
                     <select name="submenu" id="submenu" required data-parsley-required-message="Selecione uma opção" class="form-control">
                         <option value=""></option>
                         <option value="C">Cadastros</option>
-                        <option value="P">Processos</option>
                         <option value="R">Relatórios</option>
                     </select>
         		
