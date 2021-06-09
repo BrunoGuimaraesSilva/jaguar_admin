@@ -1,9 +1,11 @@
-version: '3'
+version: '2'
 services:
   apache:
-    image: 'lobmax/my_php:latest'
+    build: .
     container_name: jaguar
     ports:
       - '80:80'
     volumes:
       - .:/var/www/html
+    networks:
+      - default

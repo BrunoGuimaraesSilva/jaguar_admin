@@ -1,6 +1,14 @@
 FROM php:7.4-apache
 
-RUN apt-get update && apt-get install -y vim
-RUN docker-php-ext-install mysqli pdo pdo_mysql;
+# Install Composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+# Install unzip utility and libs needed by zip PHP extension 
+RUN apt-get update && apt-get install -y \
+    zlib1g-dev \
+    libzip-dev \
+    unzip \
+    vim
+RUN docker-php-ext-install zip
 RUN a2enmod rewrite;
 RUN service apache2 restart;
