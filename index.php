@@ -5,7 +5,7 @@ session_start(); //iniciando uma sessão
 require "libs/api.php";
 
 
-$get_data = callAPI('GET', 'http://192.168.8.157:8080/api/login');
+$get_data = callAPI('GET', 'http://192.168.0.105:8080/api/login');
 print_r(json_encode($get_data))
 ?>
 <!DOCTYPE html>

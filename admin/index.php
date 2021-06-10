@@ -1,5 +1,6 @@
 <?php
     //iniciar uma sessao
+    
     session_start();
 
     ini_set( 'display_errors', '1' );
@@ -69,13 +70,16 @@
 <body id="page-top">
     <?php
     //verificar se o usuário está logado
+    //print_r($_SESSION); 
+    //echo ($_SESSION["jaguar"]["id"]);
+    //exit;
     if ( !isset ( $_SESSION["jaguar"]["id"] ) ) {
         //mostrar a tela de login
         include "paginas/login.php";
     } else {
         
         //incluir o arquivo de conexao com o banco
-        include "libs/conectar.php";
+        //include "libs/conectar.php";
 
         //incluir o header
         include "header.php";
@@ -101,32 +105,30 @@
 
 
         //verificar o arquivo (tabela)
-        if ( !empty ( $arquivo ) ) {
+        //if ( !empty ( $arquivo ) ) {
 
-            $ip = $_SERVER['REMOTE_ADDR'];
-            $acao = $pasta; //listar, excluir, cadastros
-            $tabela = $arquivo; //categorias, produtos
-            $usuario = $_SESSION["jaguar"]["id"]; //id do usuario
-            $tabela_id = $id ?? NULL;
+            //$ip = $_SERVER['REMOTE_ADDR'];
+            //$acao = $pasta; //listar, excluir, cadastros
+            //$tabela = $arquivo; //categorias, produtos
+            //$usuario = $_SESSION["jaguar"]["id"]; //id do usuario
+            //$tabela_id = $id ?? NULL;
 
 
             //se o id não estiver em branco e a acção for diferente de excluir, a ação será editar
-            if ( ( !empty ( $tabela_id ) ) and ( $acao != "excluir" ) )
-                $acao = "editar";
+            //if ( ( !empty ( $tabela_id ) ) and ( $acao != "excluir" ) )$acao = "editar";
 
-            $sql = "insert into log values (NULL,
-            :usuario, NOW(), :ip, :tabela, :acao, :tabela_id )";
-            $consulta = $pdo->prepare($sql);
-            $consulta->bindParam(':usuario', $usuario);
-            $consulta->bindParam(':ip', $ip);
-            $consulta->bindParam(':tabela_id', $tabela_id);
-            $consulta->bindParam(':tabela', $tabela);
-            $consulta->bindParam(':acao', $acao);
+            //$sql = "insert into log values (NULL, :usuario, NOW(), :ip, :tabela, :acao, :tabela_id )";
+            //$consulta = $pdo->prepare($sql);
+            //$consulta->bindParam(':usuario', $usuario);
+            //$consulta->bindParam(':ip', $ip);
+            //$consulta->bindParam(':tabela_id', $tabela_id);
+            //$consulta->bindParam(':tabela', $tabela);
+            //$consulta->bindParam(':acao', $acao);
 
-            if ( !$consulta->execute() )
-                echo $consulta->errorInfo()[2];
+            //if ( !$consulta->execute() )
+               //echo $consulta->errorInfo()[2];
 
-        }
+        //}
 
         /*echo "<p>{$pasta} {$arquivo}</p>"; 
         
@@ -139,24 +141,23 @@
         //verificar o acesso aquele arquivo
 
         //pegar o tipo de usuário
-        $tipo_id = $_SESSION["jaguar"]["tipo_id"];
+        //$tipo_id = $_SESSION["jaguar"]["tipo_id"];
 
-        $sql = "select acesso from acesso where tabela = :arquivo AND 
-            tipo_id = :tipo_id limit 1";
-        $consulta = $pdo->prepare($sql);
-        $consulta->bindParam(":arquivo", $arquivo);
-        $consulta->bindParam(":tipo_id", $tipo_id);
-        $consulta->execute();
-        $dados = $consulta->fetch(PDO::FETCH_OBJ);
+        //$sql = "select acesso from acesso where tabela = :arquivo AND tipo_id = :tipo_id limit 1";
+        //$consulta = $pdo->prepare($sql);
+        //$consulta->bindParam(":arquivo", $arquivo);
+        //$consulta->bindParam(":tipo_id", $tipo_id);
+        //$consulta->execute();
+        //$dados = $consulta->fetch(PDO::FETCH_OBJ);
 
-        $acesso = $dados->acesso ?? "N";
+        //$acesso = $dados->acesso ?? "N";
 
         //echo $acesso;
 
         //verificar se o arquivo existe
-        if ( $acesso == "N") include "paginas/acesso.php";
-        else if ( file_exists( $pagina ) ) include $pagina;
-        else include "paginas/erro.php";
+        //if ( $acesso == "N") include "paginas/acesso.php";
+        //else if ( file_exists( $pagina ) ) include $pagina;
+        //else include "paginas/erro.php";
 
         //incluir o footer
         include "footer.php";

@@ -5,21 +5,20 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 	
-                <img src="images/logo.png" alt="Sub Sub Marino">
+                <img class="mt-4" src="images/logo2.png" alt="Jaguar">
 
             </a>
 
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider my-0 mt-4">
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -30,30 +29,45 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="cadastros/veiculo"><i class="fas fa-car"></i> Veículos</a>
+                        <a class="collapse-item" href="cadastros/marca"><i class="fab fa-bandcamp"></i> Marca</a>
+                        <a class="collapse-item" href="cadastros/cor"><i class="fas fa-palette"></i> Cor</a>
+                        <a class="collapse-item" href="cadastros/usuarios"><i class="fas fa-users"></i> Usuários</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <!--<li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-plus"></i>
+                    <span>Cadastros</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">-->
                         <?php
-                            include "libs/docs.php";
+                            //include "libs/docs.php";
 
-                            $sql = "select * from menu where submenu = 'C' 
-                                order by nome";
-                            $consulta = $pdo->prepare($sql);
-                            $consulta->execute();
+                            //$sql = "select * from menu where submenu = 'C'order by nome";
+                            //$consulta = $pdo->prepare($sql);
+                            //$consulta->execute();
 
-                            while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
+                            //while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
 
-                                $acesso = acesso($pdo, $dados->tabela);
-                                if ( $acesso == "S" ) {
-                                ?>
-                                <a class="collapse-item" href="<?=$dados->url?>"><i class="<?=$dados->icone?>"></i> <?=$dados->nome?></a>
+                                //$acesso = acesso($pdo, $dados->tabela);
+                                //if ( $acesso == "S" ) {
+                                //?>
+                                <!--<a class="collapse-item" href="<//$dados->url?>"><i class="<//$dados->icone?>"></i> <//$dados->nome?></a>
                                 <?php
-                                }
+                                //}
 
-                            }
+                            //}
                         ?>
                     </div>
                 </div>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
+            <!--Nav Item - Utilities Collapse Menu -->
             <!--<li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
@@ -131,17 +145,13 @@
 
                         
 
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
+                        <!--<div class="topbar-divider d-none d-sm-block"></div>-->
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                	<?=$_SESSION['submarino']['nome']?>
+                                	Oi, <?=$_SESSION['jaguar']['nome']?>
                                 </span>
-                                <img class="img-profile rounded-circle"
-                                    src="<?="../arquivos/".$_SESSION['submarino']['foto']."p.jpg"?>">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
