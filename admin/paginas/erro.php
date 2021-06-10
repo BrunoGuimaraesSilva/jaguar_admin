@@ -1,5 +1,5 @@
 <?php
-    if ( ! isset ( $_SESSION['submarino']['id'] ) ) exit;
+    if ( ! isset ( $_SESSION['jaguar']['id'] ) ) exit;
 ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">

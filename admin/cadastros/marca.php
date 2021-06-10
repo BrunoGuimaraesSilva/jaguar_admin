@@ -1,12 +1,12 @@
 <?php
     if ( ! isset ( $_SESSION['jaguar']['id'] ) ) exit;
 
-    $tipo = NULL;
+    $categoria = NULL;
 
     if ( ! empty ( $id ) ) {
 
         //sql para recuperar os dados daquele id
-        $sql = "select * from tipo where id = :id limit 1";
+        $sql = "select * from categoria where id = :id limit 1";
         //pdo - preparar
         $consulta = $pdo->prepare($sql);
         //passar um parametro - id
@@ -18,34 +18,35 @@
 
         //recuperar os dados
         $id = $dados->id;
-        $tipo = $dados->tipo;
+        $categoria = $dados->categoria;
 
     }
 
+    //echo "<p>{$id} - {$categoria}</p>";
 ?>
 <div class="card">
     <div class="card-header">
-        <h3 class="float-left">Cadastro de Tipo de Usuário</h3>
+        <h3 class="float-left">Cadastro de Marca</h3>
 
         <div class="float-right">
-        	<a href="cadastros/tipos" class="btn btn-info">
+        	<a href="cadastros/categorias" class="btn btn-info">
         		<i class="fas fa-file"></i> Novo
         	</a>
-        	<a href="listar/tipos" class="btn btn-info">
+        	<a href="listar/categorias" class="btn btn-info">
         		<i class="fas fa-search"></i> Listar
         	</a>
         </div>
     </div>
     <div class="card-body">
-        <form name="formCadastro" method="post" action="salvar/tipos" data-parsley-validate="">
+        <form name="formCadastro" method="post" action="salvar/categorias" data-parsley-validate="">
         	<div class="row">
         		<div class="col-12 col-md-2">
         			<label for="id">ID:</label>
         			<input type="text" name="id" id="id" class="form-control" readonly value="<?=$id?>">
         		</div>
         		<div class="col-12 col-md-10">
-        			<label for="tipo">Tipo de Usuário:</label>
-        			<input type="text" name="tipo" id="tipo" class="form-control" required data-parsley-required-message="Preencha o tipo" value="<?=$tipo?>">
+        			<label for="categoria">Marca:</label>
+        			<input type="text" name="categoria" id="categoria" class="form-control" required data-parsley-required-message="Preencha a categoria" value="<?=$categoria?>">
         		</div>
         	</div>
 

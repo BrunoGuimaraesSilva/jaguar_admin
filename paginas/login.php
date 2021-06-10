@@ -2,6 +2,7 @@
 	//verificar se a variável $pagina não existe
 	if ( !isset ( $pagina ) ) exit;
 ?>
+<br/>
 <h1>Efetuar Login</h1>
 <form name="formLogin" method="post" action="index.php?pagina=logar" data-parsley-validate="">
 	<label for="email">E-mail:</label>

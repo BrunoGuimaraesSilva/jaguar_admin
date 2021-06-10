@@ -2,7 +2,7 @@
 	//iniciar a sessao
 	session_start();
 	//verificar se esta logado
-	if ( ! isset ( $_SESSION['submarino']['id'] ) ) exit;
+	if ( ! isset ( $_SESSION['jaguar']['id'] ) ) exit;
 
 	//recuperar os dados
 	$venda_id = trim ( $_GET["venda_id"] ?? NULL );

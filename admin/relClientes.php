@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if ( ! isset ( $_SESSION['submarino']['id'] ) ) exit;
+    if ( ! isset ( $_SESSION['jaguar']['id'] ) ) exit;
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
     <meta name="description" content="Sistema de e-commerce SubSubMarino">
     <meta name="author" content="">
 
-    <title>ADMIN - SubSubmarino</title>
+    <title>ADMIN - Jaguar Motors</title>
 
     <base href="<?php echo "http://".$_SERVER["HTTP_HOST"].$_SERVER["SCRIPT_NAME"]; ?>">
 
