@@ -99,7 +99,7 @@ function mensagem($titulo, $mensagem, $icone)
 /* *********************************
 	* Função para formatar valores
 	* $valor - valor em pt
-	*********************************** */
+*********************************** */
 
 function formatarValor($valor)
 {

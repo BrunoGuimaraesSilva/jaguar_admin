@@ -2,10 +2,11 @@
 session_start(); //iniciando uma sessão
 
 //incluir o arquivo de conexao com o banco
-require "utils/index.php";
+require "libs/api.php";
 
 
-$get_data = callAPI('GET', 'http://192.168.8.157:8080/api/login', false);
+$get_data = callAPI('GET', 'http://192.168.8.157:8080/api/login');
+print_r(json_encode($get_data))
 ?>
 <!DOCTYPE html>
 <html>
