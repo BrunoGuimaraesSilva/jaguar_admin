@@ -1,5 +1,8 @@
 .bg-login-image {
-	background: url(../images/login.png) center;
+	background-image: url(../images/login.png) !important;
+	background-size: contain !important;
+	background-repeat: no-repeat !important;
+	background-origin: content-box !important;
 }
 
 .parsley-errors-list {

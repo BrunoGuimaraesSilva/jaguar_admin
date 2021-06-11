@@ -1,12 +1,6 @@
 <?php
 session_start(); //iniciando uma sessão
 
-//incluir o arquivo de conexao com o banco
-require "libs/api.php";
-
-
-$get_data = callAPI('GET', 'http://192.168.0.105:8080/api/login');
-print_r(json_encode($get_data))
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,26 +51,6 @@ print_r(json_encode($get_data))
           <strong>Ofertas</strong>
         </a>
         </li>
-        
-          <!--//sql para selecionar as categorias
-          $sql = "select * from categoria order by categoria";
-          //executar este sql
-          $result = mysqli_query($con, $sql);
-          //recuperar os dados por linha
-          while ( $dados = mysqli_fetch_array( $result ) ){
-
-            //separar os resultados
-            $id = $dados["id"];
-            $categoria = $dados["categoria"];
-            //echo "<p>{$id} {$categoria}</p>";
-            echo "<li class=\"nav-item\">
-              <a class=\"nav-link\" href=\"index.php?pagina=categoria&id={$id}\">
-                {$categoria}
-            </a>
-            </li>";
-
-          }-->
-        
 
         <li class="nav-item">
           <a class="nav-link" href="index.php?pagina=sobre">
