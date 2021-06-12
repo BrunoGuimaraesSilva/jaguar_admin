@@ -1,6 +1,10 @@
 <?php
 if (!isset($_SESSION['jaguar']['id'])) exit;
 
+include "libs/docs.php";
+include "libs/api.php";
+
+
 if ($_POST) {
 
     foreach ($_POST as $key => $value) {
@@ -15,7 +19,7 @@ if ($_POST) {
         exit;
     }
 
-    if (!empty($_FILES["foto"]["name"])) {
+    if (false) {
         if (!move_uploaded_file($_FILES["foto"]["tmp_name"], "../arquivos/" . $_FILES["foto"]["name"])) {
             mensagem("Erro", "Nao foi possivel copiar a foto", "error");
             exit;
@@ -27,66 +31,67 @@ if ($_POST) {
     }
 
     if (empty($id)) {
-        $senha = password_hash($senha, PASSWORD_DEFAULT);
-        $sql =
-            "INSERT INTO usuario 
-                VALUES(NULL, :nome, :email, :login, :senha, :foto, :tipo_id, :ativo)
-            ";
-        $consulta = $pdo->prepare($sql);
-        $consulta->bindParam(":nome", $nome);
-        $consulta->bindParam(":email", $email);
-        $consulta->bindParam(":login", $login);
-        $consulta->bindParam(":senha", $senha);
-        $consulta->bindParam(":foto", $foto);
-        $consulta->bindParam(":tipo_id", $tipo_id);
-        $consulta->bindParam(":ativo", $ativo);
+        $arrayUsuario = array(
+            "email" => $email,
+            "nome" => $nome,
+            "sobrenome" => $sobrenome,
+            "data_nascimento" => $data_nascimento
+        );
+
+        $dataUsuario = callAPI('POST', 'http://192.168.8.157:8080/api/usuario', $arrayUsuario);
+
+        if ($dataUsuario["status"] == 200) {
+
+            $arrayLogin = array(
+                "login" => $login,
+                "senha" => $senha,
+                "id_usuario" => $dataUsuario['data']->id_usuario
+            );
+
+            $dataLogin = callAPI('POST', 'http://192.168.8.157:8080/api/login', $arrayLogin);
+
+            if ($dataLogin["status"] == 200) {
+                mensagemLocation('Sucesso', 'Registro cadastrado com sucesso!', 'success', 'listar/usuarios');
+                exit;
+            }
+            mensagemLocation('Erro', 'Erro ao salvar', 'error', 'listar/usuarios');
+            exit;
+        }
+
     } else {
 
-        $s = NULL;
-        $f = NULL;
+        $arrayUsuario = array(
+            "email" => $email,
+            "nome" => $nome,
+            "sobrenome" => $sobrenome,
+            "data_nascimento" => $data_nascimento
+        );
 
-        if (!empty($senha)) {
-            $senha = password_hash($senha, PASSWORD_DEFAULT);
-            $s = ", senha = :senha";
-        };
+        $dataUsuario = callAPI('PUT', 'http://192.168.8.157:8080/api/usuario/' . $id_usuario, $arrayUsuario);
 
-        if (!empty($foto)) {
-            $f = ", foto = :foto,";
-        };
+        if ($dataUsuario["status"] == 200) {
 
-        $sql =
-            "UPDATE usuario SET
-                nome = :nome, 
-                email = :email, 
-                tipo_id = :tipo_id, 
-                ativo = :ativo 
-                $s
-                $f
-            WHERE id = :id 
-        ";
+            if($senha == ""){
+                $dataLogin = callAPI('GET', 'http://192.168.8.157:8080/api/login/' . $id)['data'];
+                $senha = $dataLogin->senha;
+            }
+            
+            $arrayLogin = array(
+                "login" => $login,
+                "senha" => $senha,
+                "id_usuario" => $dataUsuario['data']->id_usuario
+            );
 
-        $consulta = $pdo->prepare($sql);
-        $consulta->bindParam(":nome", $nome);
-        $consulta->bindParam(":email", $email);
-        $consulta->bindParam(":tipo_id", $tipo_id);
-        $consulta->bindParam(":ativo", $ativo);
-        $consulta->bindParam(":id", $id);
+            $dataLogin = callAPI('PUT', 'http://192.168.8.157:8080/api/login/' . $id, $arrayLogin);
 
-        if (!empty($s)) {
-            $consulta->bindParam(":senha", $senha);
-        }
-
-        if (!empty($f)) {
-            $consulta->bindParam(":foto", $foto);
+            if ($dataLogin["status"] == 200) {
+                mensagemLocation('Sucesso', 'Registro editado com sucesso!', 'success', 'listar/usuarios');
+                exit;
+            }
+            mensagemLocation('Erro', 'Erro ao salvar', 'error', 'listar/usuarios');
+            exit;
         }
     }
-
-    if ($consulta->execute()) {
-        mensagem("Salvo", "Registro salvo com sucesso", "ok");
-        exit;
-    }
-    mensagem("Erro", "Erro ao salvar    ", "error");
-    exit;
 }
 
 mensagem("Erro", "Requisicao invalida", "error");

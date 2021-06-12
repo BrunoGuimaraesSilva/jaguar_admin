@@ -21,31 +21,34 @@
             <thead>
                 <tr>
                     <td width="10%">ID</td>
-                    <td width="50%">Nome do Usuário</td>
-                    <td width="20%">Login do Usuário</td>
-                    <td width="10%">Ativo</td>
-                    <td width="10%">Opções</td>
+                    <td width="10%">ID Usuário</td>
+                    <td width="50%">Nome</td>
+                    <td width="50%">Sobrenome</td>
+                    <td width="50%">Email</td>
+                    <td width="20%">Login</td>
+                    <td width="20%">Ações</td>
                 </tr>      
             </thead>
             <tbody>
                 <?php
                     //selecionat todas as categorias
-                    $sql = "select * from usuario order by nome";
-                    //pdo -> prepare
-                    $consulta = $pdo->prepare($sql);
-                    //executar o comando sql
-                    $consulta->execute();
-
-                    while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
-
+                    include "libs/api.php";
+                    $dadosLogin = callAPI('GET','http://192.168.8.157:8080/api/login')['data'];
+                    //$dadosLogin = callAPI('GET','http://192.168.0.105:8080/api/login')['data'];
+                    
+                    foreach ($dadosLogin as $key => $value) {
+                    $dadosUsuario = callAPI('GET','http://192.168.8.157:8080/api/usuario/'. $value->id_usuario)['data'];
+                    //$dadosUsuario = callAPI('GET','http://192.168.0.105:8080/api/usuario/'. $value->id)['data'];
                         ?>
                         <tr>
-                            <td><?=$dados->id?></td>
-                            <td><?=$dados->nome?></td>
-                            <td><?=$dados->login?></td>
-                            <td><?=$dados->ativo?></td>
+                            <td><?=$value->id?></td>
+                            <td><?=$dadosUsuario->id_usuario?></td>
+                            <td><?=$dadosUsuario->nome?></td>
+                            <td><?=$dadosUsuario->sobrenome?></td>
+                            <td><?=$dadosUsuario->email?></td>
+                            <td><?=$value->login?></td>
                             <td>
-                                <a href="cadastros/usuarios/<?=$dados->id?>" class="btn btn-success btn-sm">
+                                <a href="cadastros/usuarios/<?=$value->id?>" class="btn btn-success btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </td>
