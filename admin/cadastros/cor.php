@@ -7,8 +7,8 @@
 
     if ( ! empty ( $id ) ) {
 
-        $dados = callAPI('GET','http://192.168.0.105:8080/api/cor/'.$id)['data'];  
-        
+        $dados = callAPI('GET','http://192.168.8.157:8080/api/cor/'.$id)['data'];  
+        //$dados = callAPI('GET','http://192.168.0.105:8080/api/cor/'.$id)['data'];  
         $id = $dados->id;
         $cor = $dados->cor;
 

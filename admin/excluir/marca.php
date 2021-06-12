@@ -12,12 +12,13 @@ if (empty($id)) {
 }
 
 //excluir a categoria
-$dados = callAPI(`DELETE`, 'http://192.168.8.157:8080/api/cor/'.$id);
-//$dados = callAPI(`DELETE`, 'http://192.168.0.105:8080/api/cor/'.$id);
+$dados = callAPI(`DELETE`, 'http://192.168.8.157:8080/api/marca/'.$id);
+//$dados = callAPI(`DELETE`, 'http://192.168.0.105:8080/api/marca/'.$id);
+
 //verificar se conseguiu excluir
 if ($dados["status"] == 200) {
-    mensagemLocation('Sucesso','Cor deletado com sucesso!','success','listar/cor');
+    mensagemLocation('Sucesso','Marca deletada com sucesso!','success','listar/marca');
      
 } else {
-    mensagem('Erro','Erro ao deletar a cor desejada','error');
+    mensagem('Erro','Erro ao deletar a marca desejada','error');
 }
