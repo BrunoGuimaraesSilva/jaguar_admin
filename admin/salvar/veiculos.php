@@ -3,25 +3,6 @@
 
     if ( $_POST ) {
 
-    	//print_r( $_POST );
-
-    	//print_r( $_FILES );
-
-    	//recuperar os dados dados
-
-    	/*$id = "igor";
-
-    	echo "<p>O valor de id é $id</p>";
-
-    	$$id = "chimbinha";
-
-    	echo "<p>O valor de igor é $igor $id</p>";
-
-    	$$igor = "joelma";
-
-    	echo "<p>O valor de chimbinha é $chimbinha</p>";*/
-
-
         include "libs/imagem.php";
 
     	foreach ($_POST as $key => $value) {
@@ -30,16 +11,9 @@
     	}
 
     	if ( empty ( $produto ) ) {
-    		$titulo = "Erro ao salvar";
-    		$mensagem = "Preencha o campo produto";
-    		$icone = "error";
-
-    		mensagem($titulo, $mensagem, $icone);
+    	    mensagem("Erro ao salvar", "Preencha o campo produto", "error");
     	} else if ( empty ( $descricao ) ) {
- 
-     		mensagem("Erro ao salvar", 
-     			"Preencha o campo descrição", 
-     			"error");
+     		mensagem("Erro ao salvar","Preencha o campo descrição","error");
     	}
 
     	/*echo formatarValor($valor);
@@ -60,9 +34,7 @@
 
         //se o id estiver em branco e o imagem tbém - erro
         if ( ( empty ( $id ) ) and ( empty ( $_FILES['imagem']['name'] ) ) ) {
-            mensagem("Erro ao enviar imagem", 
-                "Selecione um arquivo JPG válido", 
-                "error");
+            mensagem("Erro ao enviar imagem","Selecione um arquivo JPG válido","error");
         } 
 
         //se existir imagem - copia para o servidor
@@ -96,9 +68,7 @@
 
             //redimensionar a imagem
             $pastaFotos = '../produtos/';
-            loadImg($pastaFotos.$_FILES['imagem']['name'], 
-                    $imagem, 
-                    $pastaFotos);
+            loadImg($pastaFotos.$_FILES['imagem']['name'], $imagem, $pastaFotos);
 
         } //fim da verificação da foto
 
@@ -144,15 +114,10 @@
 
         //executar e verificar se foi salvo de verdade
         if ( $consulta->execute() ) {
-            mensagem("OK", 
-                "Registro salvo/alterado com sucesso!", 
-                "ok");
+            mensagem("OK","Registro salvo/alterado com sucesso!","ok");
         } else {
             echo $erro = $consulta->errorInfo()[2];
-
-            mensagem("Erro", 
-                "Erro ao salvar ou alterar registro", 
-                "error");
+            mensagem("Erro","Erro ao salvar ou alterar registro","error");
         }
 
 

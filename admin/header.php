@@ -29,7 +29,7 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="cadastros/veiculo"><i class="fas fa-car"></i> Veículos</a>
+                        <a class="collapse-item" href="cadastros/veiculos"><i class="fas fa-car"></i> Veículos</a>
                         <a class="collapse-item" href="cadastros/marca"><i class="fab fa-bandcamp"></i> Marca</a>
                         <a class="collapse-item" href="cadastros/cor"><i class="fas fa-palette"></i> Cor</a>
                         <a class="collapse-item" href="cadastros/usuarios"><i class="fas fa-users"></i> Usuários</a>
