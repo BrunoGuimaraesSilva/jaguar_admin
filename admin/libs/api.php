@@ -11,22 +11,27 @@ require '../vendor/autoload.php';
 
 function CallAPI($method = 'GET', $url = '', $data = [], $option = [])
 {
-    $client = new GuzzleHttp\Client();
+    $client = new GuzzleHttp\Client([
+        'headers' => [ 'Content-Type' => 'application/json' ]
+    ]);
 
     switch ($method) {
         case 'POST':
-            $res = $client->request('POST', $url, [
-                'form_params' => [$data]
-            ]);
+            $res = $client->post($url,
+                ['body' => json_encode(
+                    $data
+                )]
+            );
             break;
         case 'GET':
             $res = $client->request('GET', $url, $option);
             break;
         case 'PUT':
-            $res = $client->put($url, [
-                'body' => [$data],
-                'timeout' => 5
-            ]);
+            $res = $client->put($url, 
+                ['body' => json_encode(
+                    $data
+                )]
+            );
             break;
         case `DELETE`:
             $res = $client->delete($url);

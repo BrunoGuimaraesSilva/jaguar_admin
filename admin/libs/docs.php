@@ -76,8 +76,7 @@ function validarSenha($senha)
 	* $icone - icone da janela (error, success, question)
 	************************************* */
 
-function mensagem($titulo, $mensagem, $icone)
-{
+function mensagem($titulo, $mensagem, $icone) {
 
 ?>
 	<script>
@@ -94,6 +93,26 @@ function mensagem($titulo, $mensagem, $icone)
 <?php
 
 	exit;
+}
+
+function mensagemLocation($titulo, $mensagem, $icone, $local) {
+
+	?>
+	<script>
+		//mostrar a telinha animada - alert
+		Swal.fire(
+		  '<?=$titulo?>',
+		  '<?=$mensagem?>',
+		  '<?=$icone?>'
+		).then((result) => {
+			//retornar para a tela desejada
+			location.href='<?=$local?>';
+		})
+	</script>
+	<?php
+
+	exit;
+
 }
 
 /* *********************************

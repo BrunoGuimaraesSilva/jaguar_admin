@@ -3,13 +3,13 @@
 ?>
 <div class="card">
     <div class="card-header">
-        <h3 class="float-left">Listagem de Categorias</h3>
+        <h3 class="float-left">Listagem de Cores</h3>
 
         <div class="float-right">
-        	<a href="cadastros/categorias" class="btn btn-info">
+        	<a href="cadastros/cor" class="btn btn-info">
         		<i class="fas fa-file"></i> Novo
         	</a>
-        	<a href="listar/categorias" class="btn btn-info">
+        	<a href="listar/cor" class="btn btn-info">
         		<i class="fas fa-search"></i> Listar
         	</a>
         </div>
@@ -21,31 +21,33 @@
             <thead>
                 <tr>
                     <td width="10%">ID</td>
-                    <td width="80%">Nome da Categoria</td>
+                    <td width="80%">Nome da Cor</td>
                     <td width="10%">Opções</td>
                 </tr>      
             </thead>
             <tbody>
                 <?php
+                    include "libs/api.php";
                     //selecionat todas as categorias
-                    $sql = "select * from categoria order by categoria";
+                    //$sql = "select * from categoria order by categoria";
                     //pdo -> prepare
-                    $consulta = $pdo->prepare($sql);
+                    //$consulta = $pdo->prepare($sql);
                     //executar o comando sql
-                    $consulta->execute();
+                    //$consulta->execute();
+                    $dados = callAPI('GET','http://192.168.0.105:8080/api/cor')['data'];
 
-                    while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ){
-
+                    foreach ($dados as $key => $value) {
+                        
                         ?>
                         <tr>
-                            <td><?=$dados->id?></td>
-                            <td><?=$dados->categoria?></td>
+                            <td><?=$value->id?></td>
+                            <td><?=$value->cor?></td>
                             <td>
-                                <a href="cadastros/categorias/<?=$dados->id?>" class="btn btn-success btn-sm">
+                                <a href="cadastros/cor/<?=$value->id?>" class="btn btn-success btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
 
-                                <a href="javascript:excluir(<?=$dados->id?>)" class="btn btn-danger btn-sm">
+                                <a href="javascript:excluir(<?=$value->id?>)" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
@@ -73,7 +75,7 @@
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
             //enviar para excluir
-            location.href='excluir/categorias/'+id;
+            location.href='excluir/cor/'+id;
           } 
         })
     }
