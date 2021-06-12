@@ -3,13 +3,13 @@
 ?>
 <div class="card">
     <div class="card-header">
-        <h3 class="float-left">Listagem de Cores</h3>
+        <h3 class="float-left">Listagem de Marcas</h3>
 
         <div class="float-right">
-        	<a href="cadastros/cor" class="btn btn-info">
+        	<a href="cadastros/marca" class="btn btn-info">
         		<i class="fas fa-file"></i> Novo
         	</a>
-        	<a href="listar/cor" class="btn btn-info">
+        	<a href="listar/marca" class="btn btn-info">
         		<i class="fas fa-search"></i> Listar
         	</a>
         </div>
@@ -21,24 +21,24 @@
             <thead>
                 <tr>
                     <td width="10%">ID</td>
-                    <td width="80%">Nome da Cor</td>
+                    <td width="80%">Nome da marca</td>
                     <td width="10%">Opções</td>
                 </tr>      
             </thead>
             <tbody>
                 <?php
                     include "libs/api.php";
-                    $dados = callAPI('GET','http://192.168.8.157:8080/api/cor')['data'];
-                    //$dados = callAPI('GET','http://192.168.0.105:8080/api/cor')['data'];
+                    $dados = callAPI('GET','http://192.168.8.157:8080/api/marca')['data'];
+                    //$dados = callAPI('GET','http://192.168.0.105:8080/api/marca')['data'];
 
                     foreach ($dados as $key => $value) {
                         
                         ?>
                         <tr>
                             <td><?=$value->id?></td>
-                            <td><?=$value->cor?></td>
+                            <td><?=$value->marca?></td>
                             <td>
-                                <a href="cadastros/cor/<?=$value->id?>" class="btn btn-success btn-sm">
+                                <a href="cadastros/marca/<?=$value->id?>" class="btn btn-success btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
 
@@ -70,7 +70,7 @@
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
             //enviar para excluir
-            location.href='excluir/cor/'+id;
+            location.href='excluir/marca/'+id;
           } 
         })
     }
