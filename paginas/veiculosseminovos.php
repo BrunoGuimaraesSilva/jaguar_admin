@@ -14,12 +14,12 @@
 		
 		foreach ($dados as $key => $value) {
 
-			if ($value->id_tipo = 0) {
+			if ($value->id_tipo == 0) {
 				$valor = "R$ " . number_format($value->valor, 2, ",", ".");
 				$imagem = $value->foto;
 
 				echo "<div class='col-12 col-md-4 text-center'>
-					<img src='{$imagem}m.jpeg' alt='{$value->modelo}' class='w-100'>
+					<img src='{$imagem}' alt='{$value->modelo}' class='w-100'>
 					<h2>{$value->modelo}</h2>
 					<p>{$valor}</p>
 					<p>

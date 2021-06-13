@@ -37,18 +37,16 @@
 
 	$dataMarca = callAPI('GET', '/api/marca/' . $dados->id_marca)['data'];
 	$marca = $dataMarca->marca;
+
+	$ano_modelo = new DateTime($value->ano_modelo);
+    $ano_fabricacao = new DateTime($value->ano_fabricacao);
+
+
 ?>
 <br/>
-<div class="row">
-	<div class="col-12 col-md-6">
-		<a href="<?=$imagem?>g.jpg" data-lightbox="produto" title="<?=$dados->modelo?>">
-			<img src="<?=$imagem?>m.jpg" alt="<?=$dados->modelo?>" class="w-100">
-		</a>
-	</div>	
-	<div class="col-12 col-md-8">
-		<button class="btn btn-info">Realizar uma Proposta</button>
-	</div> 
-</div>
+<div class="text-center">
+	<img src="<?=$imagem?>" alt="<?=$dados->modelo?>" class="w-100">
+</div>	
 <br/>
 <h1><?=$dados->modelo?></h1>
 <hr>
@@ -58,15 +56,15 @@
 		<ul class="list-group">
 			<li class="list-group-item">Marca: <?=$marca?></li>
 			<li class="list-group-item">Cor: <?=$cor?></li>
-			<li class="list-group-item">Modelo</li>
-			<li class="list-group-item">A fourth item</li>
-			<li class="list-group-item">And a fifth one</li>
+			<li class="list-group-item">Ano: <?=$ano_modelo->format('Y')?></li>
 		</ul>
 	</div>	
 	<div class="col-12 col-md-6">
 		<p class="text-right">A partir de:</p>
-		<h4 class="text-right"><?=$valor?><h4>
-	</div>
+		<h4 class="text-right"><?=$valor?></h4>
+		<br/>
+		<button class="btn btn-info float-right">Realizar uma Proposta</button>
+	</div> 
 </div>
 
 
