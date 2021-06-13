@@ -15,9 +15,6 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <img src="" class="d-block w-100" alt="">
-
-            <!-- tirar classe d-none -->
-
             <div class="carousel-caption d-md-block">
               <h2></h5>
               <p></p>
@@ -25,7 +22,7 @@
             </div>
           </div>
           <div class="carousel-item">
-            <img src="" class="d-block w-100" alt="Engenharia de software">
+            <img src="" class="d-block w-100" alt="">
             <div class="carousel-caption d-md-block">
               <h2></h5>
               <p></p>
@@ -33,7 +30,7 @@
             </div>
           </div>
           <div class="carousel-item ">
-            <img style="max-height: 607px" src="" class="d-block w-100" alt="Manutenção em software">
+            <img style="max-height: 607px" src="" class="d-block w-100" alt="">
             <div class="carousel-caption d-md-block">
               <h2></h5>
               <p></p>
@@ -50,108 +47,60 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-<br/>
-	<h1 class="text-center">Veículos Novos:</h1>
+  <br/>
+  <h1 class="text-center">Veículos Novos:</h1>
   <div class="row">
   <br/>
-  <?php
-    include "libs/api.php";
-    //$dados = callAPI('GET','/api/cor')['data'];
-    $dados = callAPI('GET','/api/veiculo')['data'];
+    <?php
+      include "libs/api.php";
+      $dados = callAPI('GET','/api/veiculo')['data'];
 
-    foreach ($dados as $key => $value) {
-      $valor = "R$ " . number_format($value->valor, 2, ",", ".");
+      foreach ($dados as $key => $value) {
+        $valor = "R$ " . number_format($value->valor, 2, ",", ".");
+        $imagem = $value->foto;
 
-      if ($value->id_tipo == 1) {
-        echo "<div class='col-12 col-md-3 text-center'>
-          <img src='veiculos{$imagem}p.jpg' alt='{$produto}' class='w-100'>
-          <h2>{$value->modelo}</h2>
-          <p>{$valor}</p>
-          <p>
-            <a href='index.php?pagina=veiculo&id={$value->id}'>
-              Mais Detalhes
-            </a>
-          </p>
-        </div>";
+        if ($value->id_tipo == 1) {
+          echo "<div class='col-12 col-md-3 text-center'>
+            <br/>
+            <img src='{$imagem}.jpeg' alt='{$value->modelo}' class='w-100'>
+            <h2>{$value->modelo}</h2>
+            <p>{$valor}</p>
+            <p>
+              <a class='btn btn-info' href='index.php?pagina=veiculo&id={$value->id}'>
+                Mais Detalhes
+              </a>
+            </p>
+          </div>";
+        }
       }
-    }
-
-  ?>
+    ?>		
+  <br/>
   </div>
+  <br/>  	
+  <h1 class="text-center">Veículos Seminovos:</h1>
+  <div class="row">
+    <br/>
+    <?php
+      $dados = callAPI('GET','/api/veiculo')['data'];
 
-	<!--<div class="row">
-		
-		 PHP //selecionar 6 produtos - rand -> sorteio - limit limitar o nr de resultado
-			$sql = "select * from produto order by rand() limit 4";
-			//executar o sql
-			$result = mysqli_query($con, $sql);
+      foreach ($dados as $key => $value) {
+        $valor = "R$ " . number_format($value->valor, 2, ",", ".");
+        $imagem = $value->foto;
 
-			//separar os dados por linha
-			while ( $dados = mysqli_fetch_array( $result ) ) {
-				//separar
-				$id = $dados["id"];
-				$produto = $dados["produto"];
-				$imagem = $dados["imagem"];
-				$valor = $dados["valor"];
-				$promo = $dados["promo"];
+        if ($value->id_tipo == 0) {
+          echo "<div class='col-12 col-md-3 text-center'>
+            <img src='{$imagem}.jpeg' alt='{$value->modelo}' class='w-100'>
+            <h2>{$value->modelo}</h2>
+            <p>{$valor}</p>
+            <p>
+              <a class='btn btn-info' href='index.php?pagina=veiculo&id={$value->id}'>
+                Mais Detalhes
+              </a>
+            </p>
+          </div>";
+        }  
+      }
 
-				//se tiver promo - valor = valor da promo
-				//senao valor = valor do produto
-
-				//se a promo esta vazio - valor = valor do produto
-				if ( empty ( $promo ) ) {
-					//1499.99 -> 1.499,99
-					$valor = "R$ " . number_format($valor, 2, ",", ".");
-					$de = "";
-				} else {
-					//valor normal
-					$de = "R$ " . number_format($valor, 2, ",", ".");
-					//valor promocional
-					$valor = "R$ " . number_format($promo, 2, ",", ".");
-				}
-
-				echo "<div class='col-12 col-md-4 text-center'>
-					<img src='produtos/{$imagem}p.jpg' alt='{$produto}' class='w-100'>
-					<h2>{$produto}</h2>
-					<p class='de'>{$de}</p>
-					<p class='valor'>{$valor}</p>
-					<p>
-						<a href='index.php?pagina=produto&id={$id}' class='btn btn-success btn-lg w-100'>
-						Detalhes
-						</a>
-					</p>
-				</div>";
-
-			}-->
-		
-	</div>
-</div>		
-<br/>	
-<div>
-	<h1 class="text-center">Veículos Seminovos:</h1>
-</div>
-<div class="row">
-<br/>
-<?php
-  //$dados = callAPI('GET','/api/cor')['data'];
-  $dados = callAPI('GET','/api/veiculo')['data'];
-
-  foreach ($dados as $key => $value) {
-    $valor = "R$ " . number_format($value->valor, 2, ",", ".");
-
-    if ($value->id_tipo == 0) {
-      echo "<div class='col-12 col-md-3 text-center'>
-        <img src='veiculos{$imagem}p.jpg' alt='{$value->modelo}' class='w-100'>
-        <h2>{$value->modelo}</h2>
-        <p>{$valor}</p>
-        <p>
-          <a href='index.php?pagina=veiculo&id={$value->id}'>
-            Mais Detalhes
-          </a>
-        </p>
-      </div>";
-    }  
-  }
-
-?>
+    ?>
+  </div>
 </div>

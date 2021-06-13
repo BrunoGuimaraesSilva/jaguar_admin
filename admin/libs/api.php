@@ -14,8 +14,8 @@ function CallAPI($method = 'GET', $url = '', $data = [], $option = [])
     $client = new GuzzleHttp\Client([
         'headers' => [ 'Content-Type' => 'application/json' ]
     ]);
-    $ip = 'http://192.168.8.157:8080';
-    //$ip = 'http://172.19.160.1:8080';
+    //$ip = 'http://192.168.8.157:8080';
+    $ip = 'http://172.19.160.1:8080';
     $url = $ip.$url;
 
     switch ($method) {
