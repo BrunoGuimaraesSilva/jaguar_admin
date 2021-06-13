@@ -34,11 +34,9 @@
                     //selecionat todas as categorias
                     include "libs/api.php";
                     $dadosLogin = callAPI('GET','/api/login')['data'];
-                    //$dadosLogin = callAPI('GET','http://192.168.0.105:8080/api/login')['data'];
                     
                     foreach ($dadosLogin as $key => $value) {
                     $dadosUsuario = callAPI('GET','/api/usuario/'. $value->id_usuario)['data'];
-                    //$dadosUsuario = callAPI('GET','http://192.168.0.105:8080/api/usuario/'. $value->id)['data'];
                         ?>
                         <tr>
                             <td><?=$value->id?></td>

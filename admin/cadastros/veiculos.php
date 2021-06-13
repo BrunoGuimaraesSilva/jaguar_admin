@@ -10,12 +10,11 @@
     if ( !empty ( $id ) ) {
 
 		$dados = callAPI('GET','/api/veiculo/'.$id)['data']; 
-		//$dados = callAPI('GET','/api/veiculo/'.$id)['data'];   
-    
+
         //recuperar os dados
         $modelo = $dados->modelo;
-        $anomodelo = $dados->ano_modelo;
-		$anofabricacao = $dados->ano_fabricacao;
+        $anomodelo = date('Y', $dados->ano_modelo);
+		$anofabricacao = date('Y', $dados->ano_fabricacao);
         $valor = formatarValorBR($dados->valor);
         $imagem = $dados->foto;
         $id_marca = $dados->id_marca;
@@ -49,11 +48,11 @@
 				</div>
 				<div class="col-12 col-md-2">
 					<label for="anomodelo">Ano do Modelo:</label>
-					<input type = "year" name="anomodelo" id="anomodelo" class="form-control" required data-parsley-required-message="Digite o ano do modelo" rows="10"><?=$anomodelo?></input>
+					<input type = "year" name="anomodelo" id="anomodelo" class="form-control" required data-parsley-required-message="Digite o ano do modelo" rows="10" value="<?=$anomodelo?>"></input>
 				</div>
 				<div class="col-12 col-md-2">
 					<label for="anofabricacao">Ano de Fabricação:</label>
-					<input type="year" name="anofabricacao" id="anofabricacao" class="form-control" required data-parsley-required-message="Digite o ano de fabricação" rows="10"><?=$anofabricacao?></input>
+					<input type="year" name="anofabricacao" id="anofabricacao" class="form-control" required data-parsley-required-message="Digite o ano de fabricação" rows="10" value="<?=$anofabricacao?>"></input>
 				</div>
 				<div class="col-12 col-md-2">
 					<label for="valor">Valor do Veículo:</label>

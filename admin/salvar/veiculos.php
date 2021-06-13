@@ -112,13 +112,15 @@
                 "id_marca"=>$id_marca,
                 "id_cor"=>$id_cor,
                 "modelo"=>$modelo,
-                "ano_modelo"=>$anomodelo,
-                "ano_fabricacao"=>$anofabricacao,
+                "ano_modelo"=>$anomodelo.'-01-01',
+                "ano_fabricacao"=>$anofabricacao.'-01-01',
                 "valor"=>$valor,
                 "id_usuario"=>$_SESSION['jaguar']['id_usuario'],
                 "foto"=>$imagem,
                 "id_tipo"=>$id_tipo
             );
+
+            //print_r($arraydados);exit;
 
             $dados = callAPI('PUT','/api/veiculo/'.$id, $arraydados);
             //$sql = "update produto set produto = :produto, descricao = :descricao, valor = :valor, promo = :promo, ativo = :ativo, categoria_id = :categoria_id where id = :id limit 1";
@@ -136,6 +138,7 @@
                 "foto"=>$img,
                 "id_tipo"=>$id_tipo
             );
+            print_r($arraydados);exit;
 
             $dados = callAPI('PUT','/api/veiculo/'.$id, $arraydados);
             //print_r($dados);exit;
