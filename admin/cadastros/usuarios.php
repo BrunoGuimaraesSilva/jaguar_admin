@@ -8,9 +8,9 @@ $r = " required data-parsley-required-message='Preencha a senha' ";
 $f = " required data-parsley-required-message='Selecione uma Imagem JPG' ";
 
 if (!empty($id)) {
-    $dadosLogin = callAPI('GET', 'http://192.168.8.157:8080/api/login/' . $id)['data'];
+    $dadosLogin = callAPI('GET', '/api/login/' . $id)['data'];
     //$dadosLogin = callAPI('GET','http://192.168.0.105:8080/api/login')['data'];
-    $dadosUsuario = callAPI('GET', 'http://192.168.8.157:8080/api/usuario/' . $dadosLogin->id_usuario)['data'];
+    $dadosUsuario = callAPI('GET', '/api/usuario/' . $dadosLogin->id_usuario)['data'];
     //$dadosUsuario = callAPI('GET','http://192.168.0.105:8080/api/usuario/'. $value->id)['data'];
     $id = $dadosLogin->id;
     $nome = $dadosUsuario->nome;

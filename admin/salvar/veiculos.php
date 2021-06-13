@@ -98,12 +98,12 @@
             );
 
             //$sql = "insert into produto values( NULL, :produto, :descricao, :valor, :promo, :imagem, :ativo, :categoria_id )";
-            $dados = callAPI('POST','http://172.19.160.1:8080/api/veiculo', $arraydados);
-            //$dados = callAPI('POST','http://192.168.8.157:8080/api/veiculo', $arraydados);
+            $dados = callAPI('POST','/api/veiculo', $arraydados);
+            //$dados = callAPI('POST','/api/veiculo', $arraydados);
             
         } else if ( empty ( $imagem ) ) {
 
-            $data = callAPI('GET','http://172.19.160.1:8080/api/veiculo/'.$id,)["data"];
+            $data = callAPI('GET','/api/veiculo/'.$id,)["data"];
             $imagem = $data->foto;
 
             //print_r($data);exit;
@@ -120,7 +120,7 @@
                 "id_tipo"=>$id_tipo
             );
 
-            $dados = callAPI('PUT','http://172.19.160.1:8080/api/veiculo/'.$id, $arraydados);
+            $dados = callAPI('PUT','/api/veiculo/'.$id, $arraydados);
             //$sql = "update produto set produto = :produto, descricao = :descricao, valor = :valor, promo = :promo, ativo = :ativo, categoria_id = :categoria_id where id = :id limit 1";
          
         } else {
@@ -137,7 +137,7 @@
                 "id_tipo"=>$id_tipo
             );
 
-            $dados = callAPI('PUT','http://172.19.160.1:8080/api/veiculo/'.$id, $arraydados);
+            $dados = callAPI('PUT','/api/veiculo/'.$id, $arraydados);
             //print_r($dados);exit;
             //$sql = "update produto set produto = :produto, descricao = :descricao, valor = :valor, promo = :promo, imagem = :imagem, ativo = :ativo, categoria_id = :categoria_id where id = :id limit 1";
        

@@ -36,8 +36,8 @@
                 <?php
                         include "libs/api.php";
 
-                        $dados = callAPI('GET','http://172.19.160.1:8080/api/veiculo')['data'];
-                        //$dados = callAPI('GET','http://192.168.8.157:8080/api/veiculo')['data'];
+                        $dados = callAPI('GET','/api/veiculo')['data'];
+                        //$dados = callAPI('GET','/api/veiculo')['data'];
                         
                         
                         $imagem = "{$dados->foto}p.jpg"; 
@@ -53,12 +53,12 @@
                                 $tipo  = "Novo";
                             }
 
-                            $dataCor = callAPI('GET','http://172.19.160.1:8080/api/cor/'.$value->id_cor)['data'];
-                            //$dataCor = callAPI('GET','http://192.168.8.157:8080/api/cor/'.$value->id_cor)['data'];
+                            $dataCor = callAPI('GET','/api/cor/'.$value->id_cor)['data'];
+                            //$dataCor = callAPI('GET','/api/cor/'.$value->id_cor)['data'];
                             $cor = $dataCor->cor;
 
-                            $dataMarca = callAPI('GET','http://172.19.160.1:8080/api/marca/'.$value->id_marca)['data'];
-                            //$dataMarca = callAPI('GET','http://192.168.8.157:8080/api/marca/'.$value->id_marca)['data'];
+                            $dataMarca = callAPI('GET','/api/marca/'.$value->id_marca)['data'];
+                            //$dataMarca = callAPI('GET','/api/marca/'.$value->id_marca)['data'];
                             $marca = $dataMarca->marca;
 
 

@@ -56,8 +56,8 @@
   <br/>
   <?php
     include "libs/api.php";
-    //$dados = callAPI('GET','http://192.168.8.157:8080/api/cor')['data'];
-    $dados = callAPI('GET','http://172.19.160.1:8080/api/veiculo')['data'];
+    //$dados = callAPI('GET','/api/cor')['data'];
+    $dados = callAPI('GET','/api/veiculo')['data'];
 
     foreach ($dados as $key => $value) {
       $valor = "R$ " . number_format($value->valor, 2, ",", ".");
@@ -133,8 +133,8 @@
 <div class="row">
 <br/>
 <?php
-  //$dados = callAPI('GET','http://192.168.8.157:8080/api/cor')['data'];
-  $dados = callAPI('GET','http://172.19.160.1:8080/api/veiculo')['data'];
+  //$dados = callAPI('GET','/api/cor')['data'];
+  $dados = callAPI('GET','/api/veiculo')['data'];
 
   foreach ($dados as $key => $value) {
     $valor = "R$ " . number_format($value->valor, 2, ",", ".");

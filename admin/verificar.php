@@ -21,16 +21,16 @@ if ($_POST) {
 
 	include "libs/api.php";
 
-	//$dados = callAPI('GET', 'http://192.168.8.157:8080/api/login')['data'][0];
-	$dados = callAPI('GET', 'http://172.19.160.1:8080/api/login')['data'];
+	//$dados = callAPI('GET', '/api/login')['data'][0];
+	$dados = callAPI('GET', '/api/login')['data'];
 
 	
 	foreach ($dados as $key => $value) {
 
 		if ($value->login == $login && $value->senha == $senha) {
 			$id = $value->id;
-			//$dadosUsuario = callAPI('GET', 'http://192.168.8.157:8080/api/usuario/' . $id);
-			$dadosUsuario = callAPI('GET', 'http://172.19.160.1:8080/api/usuario/' . $id);
+			//$dadosUsuario = callAPI('GET', '/api/usuario/' . $id);
+			$dadosUsuario = callAPI('GET', '/api/usuario/' . $id);
 			
 			if (!$dadosUsuario['status'] == 200) {
 				echo "<script>alert('Usuário incorreto');history.back();</script>";

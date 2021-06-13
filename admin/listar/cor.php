@@ -28,8 +28,8 @@
             <tbody>
                 <?php
                     include "libs/api.php";
-                    //$dados = callAPI('GET','http://192.168.8.157:8080/api/cor')['data'];
-                    $dados = callAPI('GET','http://172.19.160.1:8080/api/cor')['data'];
+                    //$dados = callAPI('GET','/api/cor')['data'];
+                    $dados = callAPI('GET','/api/cor')['data'];
 
                     foreach ($dados as $key => $value) {
                         

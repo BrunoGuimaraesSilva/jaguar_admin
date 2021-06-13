@@ -12,6 +12,9 @@ require 'vendor/autoload.php';
 function CallAPI($method = 'GET', $url = '', $data = [], $option = [])
 {
     $client = new GuzzleHttp\Client();
+    $ip = 'http://192.168.8.157:8080';
+    //$ip = 'http://172.19.160.1:8080';
+    $url = $ip.$url;
 
     switch ($method) {
         case 'POST':

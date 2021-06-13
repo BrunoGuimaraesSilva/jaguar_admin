@@ -19,17 +19,6 @@ if ($_POST) {
         exit;
     }
 
-    if (false) {
-        if (!move_uploaded_file($_FILES["foto"]["tmp_name"], "../arquivos/" . $_FILES["foto"]["name"])) {
-            mensagem("Erro", "Nao foi possivel copiar a foto", "error");
-            exit;
-        }
-
-        $foto = time() . "_" . $_SESSION["submarino"]["id"];
-        include "libs/imagem.php";
-        loadImg("../arquivos/" . $_FILES["foto"]["name"], $foto, "../arquivos/");
-    }
-
     if (empty($id)) {
         $arrayUsuario = array(
             "email" => $email,
@@ -38,7 +27,7 @@ if ($_POST) {
             "data_nascimento" => $data_nascimento
         );
 
-        $dataUsuario = callAPI('POST', 'http://192.168.8.157:8080/api/usuario', $arrayUsuario);
+        $dataUsuario = callAPI('POST', '/api/usuario', $arrayUsuario);
 
         if ($dataUsuario["status"] == 200) {
 
@@ -48,7 +37,7 @@ if ($_POST) {
                 "id_usuario" => $dataUsuario['data']->id_usuario
             );
 
-            $dataLogin = callAPI('POST', 'http://192.168.8.157:8080/api/login', $arrayLogin);
+            $dataLogin = callAPI('POST', '/api/login', $arrayLogin);
 
             if ($dataLogin["status"] == 200) {
                 mensagemLocation('Sucesso', 'Registro cadastrado com sucesso!', 'success', 'listar/usuarios');
@@ -67,12 +56,12 @@ if ($_POST) {
             "data_nascimento" => $data_nascimento
         );
 
-        $dataUsuario = callAPI('PUT', 'http://192.168.8.157:8080/api/usuario/' . $id_usuario, $arrayUsuario);
+        $dataUsuario = callAPI('PUT', '/api/usuario/' . $id_usuario, $arrayUsuario);
 
         if ($dataUsuario["status"] == 200) {
 
             if($senha == ""){
-                $dataLogin = callAPI('GET', 'http://192.168.8.157:8080/api/login/' . $id)['data'];
+                $dataLogin = callAPI('GET', '/api/login/' . $id)['data'];
                 $senha = $dataLogin->senha;
             }
             
@@ -82,7 +71,7 @@ if ($_POST) {
                 "id_usuario" => $dataUsuario['data']->id_usuario
             );
 
-            $dataLogin = callAPI('PUT', 'http://192.168.8.157:8080/api/login/' . $id, $arrayLogin);
+            $dataLogin = callAPI('PUT', '/api/login/' . $id, $arrayLogin);
 
             if ($dataLogin["status"] == 200) {
                 mensagemLocation('Sucesso', 'Registro editado com sucesso!', 'success', 'listar/usuarios');

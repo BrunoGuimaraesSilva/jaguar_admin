@@ -33,11 +33,11 @@
                 <?php
                     //selecionat todas as categorias
                     include "libs/api.php";
-                    $dadosLogin = callAPI('GET','http://192.168.8.157:8080/api/login')['data'];
+                    $dadosLogin = callAPI('GET','/api/login')['data'];
                     //$dadosLogin = callAPI('GET','http://192.168.0.105:8080/api/login')['data'];
                     
                     foreach ($dadosLogin as $key => $value) {
-                    $dadosUsuario = callAPI('GET','http://192.168.8.157:8080/api/usuario/'. $value->id_usuario)['data'];
+                    $dadosUsuario = callAPI('GET','/api/usuario/'. $value->id_usuario)['data'];
                     //$dadosUsuario = callAPI('GET','http://192.168.0.105:8080/api/usuario/'. $value->id)['data'];
                         ?>
                         <tr>
