@@ -13,14 +13,16 @@
 
         //recuperar os dados
         $modelo = $dados->modelo;
-        $anomodelo = date('Y', $dados->ano_modelo);
-		$anofabricacao = date('Y', $dados->ano_fabricacao);
+       
         $valor = formatarValorBR($dados->valor);
         $imagem = $dados->foto;
         $id_marca = $dados->id_marca;
 		$id_cor = $dados->id_cor;
 		$id_tipo = $dados->id_tipo;
-
+		$ano_modelo = new DateTime($dados->ano_modelo);
+		$ano_fabricacao = new DateTime($dados->ano_fabricacao);
+		$anomodelo = $ano_modelo->format('Y');
+		$anofabricacao = $ano_fabricacao->format('Y');
     }
 
 ?>
@@ -106,7 +108,7 @@
 						//verificar se a imagem não esta em branco
 						if ( !empty ( $imagem ) ) {
 							//caminho para a imagem
-							$img = "../imgveiculos/{$imagem}m.jpg";
+							$img = "../imgveiculos/{$imagem}";
 							
 							//criar um link para abrir a imagem
 							$link = "<a href='{$img}' data-lightbox='foto' class='badge badge-success'>Abrir imagem</a>";

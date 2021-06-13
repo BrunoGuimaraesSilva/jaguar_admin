@@ -36,12 +36,6 @@
 
     	$valor = formatarValor($valor);
 
-        //programação para copiar uma imagem
-        //no insert envio da foto é obrigatório
-        //no update só se for selecionada uma nova imagem
-
-        
-
         //se o id estiver em branco e o imagem tbém - erro
         if ( ( empty ( $id ) ) and ( empty ( $_FILES['imagem']['name'] ) ) ) {
             mensagem("Erro ao enviar imagem","Selecione um arquivo JPG válido","error");
@@ -61,52 +55,41 @@
 
             //echo "<p>{$imagem}</p>"; exit;
 
+            $pastaFotos = '../imgveiculos/';
+            $_FILES['imagem']['name'] = $imagem;
+            $img = $pastaFotos.$imagem;
+
             //validar se é jpg
             if ( $_FILES['imagem']['type'] != 'image/jpeg' ) {
                 mensagem("Erro ao enviar imagem","O arquivo enviado não é um JPG válido, selecione um arquivo JPG","error");
             } else if ( $tamanho > $t ) {
                 mensagem("Erro ao enviar imagem","O arquivo é muito grande e não pode ser enviado. Tente arquivos menores que 8 MB","error");
-            } else if ( !copy ( $_FILES['imagem']['tmp_name'], '../imgveiculos/'.$_FILES['imagem']['name'] ) ) {
+            } else if ( !copy ( $_FILES['imagem']['tmp_name'], $img ) ) {
                 mensagem("Erro ao enviar imagem","Não foi possível copiar o arquivo para o servidor","error");
             }
 
-            //redimensionar a imagem
-            $pastaFotos = '../imgveiculos/';
-            $_FILES['imagem']['name'] = $imagem;
-            $img = $pastaFotos.$imagem;
-
-            //print_r($_FILES);exit;
-            //echo($img);exit;
-            //loadImg($pastaFotos.$_FILES['imagem']['name'], $imagem, $pastaFotos);
         } //fim da verificação da foto
 
-        
-
-        //se vai dar insert ou update
         if ( empty ( $id ) ) {
 
             $arraydados=array(
                 "id_marca"=>$id_marca,
                 "id_cor"=>$id_cor,
                 "modelo"=>$modelo,
-                "ano_modelo"=>$anomodelo,
-                "ano_fabricacao"=>$anofabricacao,
+                "ano_modelo"=>$anomodelo.'-01-01',
+                "ano_fabricacao"=>$anofabricacao.'-01-01',
                 "valor"=>$valor,
                 "id_usuario"=>$_SESSION['jaguar']['id_usuario'],
                 "foto"=> $img,
                 "id_tipo"=>$id_tipo
             );
 
-            //$sql = "insert into produto values( NULL, :produto, :descricao, :valor, :promo, :imagem, :ativo, :categoria_id )";
             $dados = callAPI('POST','/api/veiculo', $arraydados);
-            //$dados = callAPI('POST','/api/veiculo', $arraydados);
             
         } else if ( empty ( $imagem ) ) {
 
             $data = callAPI('GET','/api/veiculo/'.$id,)["data"];
             $imagem = $data->foto;
-
-            //print_r($data);exit;
 
             $arraydados = array(
                 "id_marca"=>$id_marca,
@@ -119,11 +102,7 @@
                 "foto"=>$imagem,
                 "id_tipo"=>$id_tipo
             );
-
-            //print_r($arraydados);exit;
-
             $dados = callAPI('PUT','/api/veiculo/'.$id, $arraydados);
-            //$sql = "update produto set produto = :produto, descricao = :descricao, valor = :valor, promo = :promo, ativo = :ativo, categoria_id = :categoria_id where id = :id limit 1";
          
         } else {
 
@@ -131,19 +110,16 @@
                 "id_marca"=>$id_marca,
                 "id_cor"=>$id_cor,
                 "modelo"=>$modelo,
-                "ano_modelo"=>$anomodelo,
-                "ano_fabricacao"=>$anofabricacao,
+                "ano_modelo"=>$anomodelo.'-01-01',
+                "ano_fabricacao"=>$anofabricacao.'-01-01',
                 "valor"=>$valor,
                 "id_usuario"=>$_SESSION['jaguar']['id_usuario'],
                 "foto"=>$img,
                 "id_tipo"=>$id_tipo
             );
-            print_r($arraydados);exit;
 
             $dados = callAPI('PUT','/api/veiculo/'.$id, $arraydados);
-            //print_r($dados);exit;
-            //$sql = "update produto set produto = :produto, descricao = :descricao, valor = :valor, promo = :promo, imagem = :imagem, ativo = :ativo, categoria_id = :categoria_id where id = :id limit 1";
-       
+            
         }
 
         if ($dados["status"] == 200) {

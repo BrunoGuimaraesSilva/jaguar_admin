@@ -26,7 +26,7 @@ session_start(); //iniciando uma sessão
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container text-center">
     <a class="navbar-brand" href="index.php">
-      <img src="images/logo3.png" alt="Jaguar">
+    <img style="height: 70px;" class="img-fluid" src="images/jaguar2.png" alt="Jaguar">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

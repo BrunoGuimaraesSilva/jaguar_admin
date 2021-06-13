@@ -51,6 +51,7 @@ if (!isset($_SESSION['jaguar']['id'])) exit;
                         $tipo  = "Novo";
                     }
 
+
                     $dataCor = callAPI('GET', '/api/cor/' . $value->id_cor)['data'];
                     $cor = $dataCor->cor;
 
@@ -72,8 +73,8 @@ if (!isset($_SESSION['jaguar']['id'])) exit;
                         <td><?= $ano_fabricacao->format('Y') ?></td>
                         <td>R$ <?= $valor ?></td>
                         <td>
-                            <a href="<?= $imagemg ?>" data-lightbox="foto" title="<?= $value->modelo ?>">
-                                <img src="<?= $imagem ?>" alt="<?= $value->modelo ?>" width="100px">
+                            <a href="<?= $value->foto ?>" data-lightbox="foto" title="<?= $value->modelo ?>">
+                                <img src="<?= $value->foto ?>" alt="<?= $value->modelo ?>" width="100px">
                             </a>
                         </td>
                         <td>
