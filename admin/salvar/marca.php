@@ -15,7 +15,8 @@ if ($_POST) {
     $marca = trim($_POST['marca'] ?? NULL);
 
     //verificar se este registro já está salvo no banco
-    $dados = callAPI('GET', 'http://192.168.8.157:8080/api/marca')['data'];
+    //$dados = callAPI('GET', 'http://192.168.8.157:8080/api/marca')['data'];
+    $dados = callAPI('GET', 'http://172.19.160.1:8080/api/marca')['data'];
 
     //se vier preenchido já existe uma marca com memso nome
     $array = array_map(function ($obj) {
@@ -33,11 +34,11 @@ if ($_POST) {
     $data = NULL;
     //se o id estiver em branco - insert
     if (empty($id)) {
-        $data = callAPI('POST', 'http://192.168.8.157:8080/api/marca', array("marca" => $marca));
-        //$data = callAPI('POST', 'http://192.168.0.105:8080/api/marca', array("marca" => $marca));
+        //$data = callAPI('POST', 'http://192.168.8.157:8080/api/marca', array("marca" => $marca));
+        $data = callAPI('POST', 'http://172.19.160.1:8080/api/marca', array("marca" => $marca));
     } else {
-        $data = callAPI('PUT', 'http://192.168.8.157:8080/api/marca/' . $id, array("marca" => $marca));
-        //$data = callAPI('PUT', 'http://192.168.5.105:8080/api/marca/' . $id, array("marca" => $marca));
+        //$data = callAPI('PUT', 'http://192.168.8.157:8080/api/marca/' . $id, array("marca" => $marca));
+        $data = callAPI('PUT', 'http://172.19.160.1:8080/api/marca/' . $id, array("marca" => $marca));
     }
 
     //verificar se deu certo

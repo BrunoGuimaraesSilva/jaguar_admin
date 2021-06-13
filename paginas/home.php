@@ -14,7 +14,7 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="../images/k5.jpg" class="d-block w-100" alt="">
+            <img src="" class="d-block w-100" alt="">
 
             <!-- tirar classe d-none -->
 
@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="carousel-item">
-            <img src="../images/fordgt.jpg" class="d-block w-100" alt="Engenharia de software">
+            <img src="" class="d-block w-100" alt="Engenharia de software">
             <div class="carousel-caption d-md-block">
               <h2></h5>
               <p></p>
@@ -33,7 +33,7 @@
             </div>
           </div>
           <div class="carousel-item ">
-            <img style="max-height: 607px" src="../images/tesla.jpg" class="d-block w-100" alt="Manutenção em software">
+            <img style="max-height: 607px" src="" class="d-block w-100" alt="Manutenção em software">
             <div class="carousel-caption d-md-block">
               <h2></h5>
               <p></p>
@@ -57,7 +57,7 @@
   <?php
     include "libs/api.php";
     //$dados = callAPI('GET','http://192.168.8.157:8080/api/cor')['data'];
-    $dados = callAPI('GET','http://192.168.0.105:8080/api/veiculo')['data'];
+    $dados = callAPI('GET','http://172.19.160.1:8080/api/veiculo')['data'];
 
     foreach ($dados as $key => $value) {
       $valor = "R$ " . number_format($value->valor, 2, ",", ".");
@@ -134,14 +134,14 @@
 <br/>
 <?php
   //$dados = callAPI('GET','http://192.168.8.157:8080/api/cor')['data'];
-  $dados = callAPI('GET','http://192.168.0.105:8080/api/veiculo')['data'];
+  $dados = callAPI('GET','http://172.19.160.1:8080/api/veiculo')['data'];
 
   foreach ($dados as $key => $value) {
     $valor = "R$ " . number_format($value->valor, 2, ",", ".");
 
     if ($value->id_tipo == 0) {
       echo "<div class='col-12 col-md-3 text-center'>
-        <img src='veiculos{$imagem}p.jpg' alt='{$produto}' class='w-100'>
+        <img src='veiculos{$imagem}p.jpg' alt='{$value->modelo}' class='w-100'>
         <h2>{$value->modelo}</h2>
         <p>{$valor}</p>
         <p>

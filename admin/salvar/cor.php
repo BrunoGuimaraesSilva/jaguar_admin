@@ -15,8 +15,8 @@ if ($_POST) {
     $cor = trim($_POST['cor'] ?? NULL);
 
     //verificar se este registro já está salvo no banco
-    $dados = callAPI('GET','http://192.168.8.157:8080/api/cor')['data'];    
-    //$dados = callAPI('GET','http://192.168.0.105:8080/api/cor')['data'];    
+    //$dados = callAPI('GET','http://192.168.8.157:8080/api/cor')['data'];    
+    $dados = callAPI('GET','http://172.19.160.1:8080/api/cor')['data'];    
     
     //se vier preenchido já existe uma cor com memso nome
     $array = array_map(function($obj) {
@@ -34,11 +34,11 @@ if ($_POST) {
     $data = NULL;
     //se o id estiver em branco - insert
     if (empty($id)) {
-        $data = callAPI('POST','http://192.168.8.157:8080/api/cor',array("cor"=>$cor));
-        //$data = callAPI('POST','http://192.168.0.105:8080/api/cor',array("cor"=>$cor));
+        //$data = callAPI('POST','http://192.168.8.157:8080/api/cor',array("cor"=>$cor));
+        $data = callAPI('POST','http://172.19.160.1:8080/api/cor',array("cor"=>$cor));
     } else {
-        $data = callAPI('PUT','http://192.168.8.157:8080/api/cor/'.$id,array("cor"=>$cor));
-        //$data = callAPI('PUT','http://192.168.0.105:8080/api/cor/'.$id,array("cor"=>$cor));
+        //$data = callAPI('PUT','http://192.168.8.157:8080/api/cor/'.$id,array("cor"=>$cor));
+        $data = callAPI('PUT','http://172.19.160.1:8080/api/cor/'.$id,array("cor"=>$cor));
     }
 
     //verificar se deu certo

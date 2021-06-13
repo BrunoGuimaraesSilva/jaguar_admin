@@ -12,8 +12,8 @@ if (empty($id)) {
 }
 
 //excluir a categoria
-$dados = callAPI(`DELETE`, 'http://192.168.8.157:8080/api/marca/'.$id);
-//$dados = callAPI(`DELETE`, 'http://192.168.0.105:8080/api/marca/'.$id);
+//$dados = callAPI(`DELETE`, 'http://192.168.8.157:8080/api/marca/'.$id);
+$dados = callAPI(`DELETE`, 'http://172.19.160.1:8080/api/marca/'.$id);
 
 //verificar se conseguiu excluir
 if ($dados["status"] == 200) {

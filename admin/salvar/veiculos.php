@@ -12,6 +12,7 @@
     	}
         
         
+
     	if (empty($modelo)) {
     	    mensagem("Erro ao salvar","Preencha o campo modelo","error");
         } else if (empty($id_marca)) {
@@ -42,7 +43,7 @@
         
 
         //se o id estiver em branco e o imagem tbém - erro
-        /*if ( ( empty ( $id ) ) and ( empty ( $_FILES['imagem']['name'] ) ) ) {
+        if ( ( empty ( $id ) ) and ( empty ( $_FILES['imagem']['name'] ) ) ) {
             mensagem("Erro ao enviar imagem","Selecione um arquivo JPG válido","error");
         } 
 
@@ -65,16 +66,21 @@
                 mensagem("Erro ao enviar imagem","O arquivo enviado não é um JPG válido, selecione um arquivo JPG","error");
             } else if ( $tamanho > $t ) {
                 mensagem("Erro ao enviar imagem","O arquivo é muito grande e não pode ser enviado. Tente arquivos menores que 8 MB","error");
-            } else if ( !copy ( $_FILES['imagem']['tmp_name'], '../veiculos/'.$_FILES['imagem']['name'] ) ) {
+            } else if ( !copy ( $_FILES['imagem']['tmp_name'], '../imgveiculos/'.$_FILES['imagem']['name'] ) ) {
                 mensagem("Erro ao enviar imagem","Não foi possível copiar o arquivo para o servidor","error");
             }
 
             //redimensionar a imagem
-            $pastaFotos = '../veiculos/';
-            loadImg($pastaFotos.$_FILES['imagem']['name'], $imagem, $pastaFotos);
-            echo($imagem);exit;
+            $pastaFotos = '../imgveiculos/';
+            $_FILES['imagem']['name'] = $imagem;
+            $img = $pastaFotos.$imagem;
 
-        } //fim da verificação da foto*/
+            //print_r($_FILES);exit;
+            //echo($img);exit;
+            //loadImg($pastaFotos.$_FILES['imagem']['name'], $imagem, $pastaFotos);
+        } //fim da verificação da foto
+
+        
 
         //se vai dar insert ou update
         if ( empty ( $id ) ) {
@@ -87,20 +93,20 @@
                 "ano_fabricacao"=>$anofabricacao,
                 "valor"=>$valor,
                 "id_usuario"=>$_SESSION['jaguar']['id_usuario'],
-                "foto"=>"imagens/opala",
+                "foto"=> $img,
                 "id_tipo"=>$id_tipo
             );
 
             //$sql = "insert into produto values( NULL, :produto, :descricao, :valor, :promo, :imagem, :ativo, :categoria_id )";
-            $dados = callAPI('POST','http://192.168.0.105:8080/api/veiculo', $arraydados);
+            $dados = callAPI('POST','http://172.19.160.1:8080/api/veiculo', $arraydados);
             //$dados = callAPI('POST','http://192.168.8.157:8080/api/veiculo', $arraydados);
             
         } else if ( empty ( $imagem ) ) {
 
-            $data = callAPI('GET','http://192.168.0.105:8080/api/veiculo'.$id,)["data"];
+            $data = callAPI('GET','http://172.19.160.1:8080/api/veiculo/'.$id,)["data"];
             $imagem = $data->foto;
 
-            print_r($data);exit;
+            //print_r($data);exit;
 
             $arraydados = array(
                 "id_marca"=>$id_marca,
@@ -114,7 +120,7 @@
                 "id_tipo"=>$id_tipo
             );
 
-            $dados = callAPI('PUT','http://192.168.0.105:8080/api/veiculo/'.$id, $arraydados);
+            $dados = callAPI('PUT','http://172.19.160.1:8080/api/veiculo/'.$id, $arraydados);
             //$sql = "update produto set produto = :produto, descricao = :descricao, valor = :valor, promo = :promo, ativo = :ativo, categoria_id = :categoria_id where id = :id limit 1";
          
         } else {
@@ -127,12 +133,12 @@
                 "ano_fabricacao"=>$anofabricacao,
                 "valor"=>$valor,
                 "id_usuario"=>$_SESSION['jaguar']['id_usuario'],
-                "foto"=>"imagens/opala",
+                "foto"=>$img,
                 "id_tipo"=>$id_tipo
             );
 
-            $dados = callAPI('PUT','http://192.168.0.105:8080/api/veiculo/'.$id, $arraydados);
-            print_r($dados);exit;
+            $dados = callAPI('PUT','http://172.19.160.1:8080/api/veiculo/'.$id, $arraydados);
+            //print_r($dados);exit;
             //$sql = "update produto set produto = :produto, descricao = :descricao, valor = :valor, promo = :promo, imagem = :imagem, ativo = :ativo, categoria_id = :categoria_id where id = :id limit 1";
        
         }

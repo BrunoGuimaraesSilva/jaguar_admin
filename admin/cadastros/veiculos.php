@@ -9,7 +9,7 @@
     //select para edição
     if ( !empty ( $id ) ) {
 
-		$dados = callAPI('GET','http://192.168.0.105:8080/api/veiculo/'.$id)['data']; 
+		$dados = callAPI('GET','http://172.19.160.1:8080/api/veiculo/'.$id)['data']; 
 		//$dados = callAPI('GET','http://192.168.8.157:8080/api/veiculo/'.$id)['data'];   
     
         //recuperar os dados
@@ -75,7 +75,7 @@
 					<select name="id_marca" id="id_marca" class="form-control" required data-parsley-required-message="Selecione uma marca">
 						<option value=""></option>
 						<?php
-							$dados = callAPI('GET','http://192.168.0.105:8080/api/marca')['data'];
+							$dados = callAPI('GET','http://172.19.160.1:8080/api/marca')['data'];
 							//$dados = callAPI('GET','http://192.168.8.157:8080/api/marca')['data'];
 				
 							foreach ($dados as $key => $value) {
@@ -89,7 +89,7 @@
 					<select name="id_cor" id="id_cor" class="form-control" required data-parsley-required-message="Selecione uma cor">
 						<option value=""></option>
 						<?php
-							$dados = callAPI('GET','http://192.168.0.105:8080/api/cor')['data'];
+							$dados = callAPI('GET','http://172.19.160.1:8080/api/cor')['data'];
 							//$dados = callAPI('GET','http://192.168.8.157:8080/api/cor')['data'];
 
 							foreach ($dados as $key => $value) {
@@ -107,7 +107,8 @@
 						//verificar se a imagem não esta em branco
 						if ( !empty ( $imagem ) ) {
 							//caminho para a imagem
-							$img = "../veiculos/{$imagem}m.jpg";
+							$img = "../imgveiculos/{$imagem}m.jpg";
+							
 							//criar um link para abrir a imagem
 							$link = "<a href='{$img}' data-lightbox='foto' class='badge badge-success'>Abrir imagem</a>";
 							$required = NULL;

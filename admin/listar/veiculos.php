@@ -36,12 +36,12 @@
                 <?php
                         include "libs/api.php";
 
-                        $dados = callAPI('GET','http://192.168.0.105:8080/api/veiculo')['data'];
+                        $dados = callAPI('GET','http://172.19.160.1:8080/api/veiculo')['data'];
                         //$dados = callAPI('GET','http://192.168.8.157:8080/api/veiculo')['data'];
                         
                         
-                        $imagem = "../veiculos/{$dados->foto}p.jpg"; 
-                        $imagemg = "../veiculos/{$dados->foto}g.jpg";
+                        $imagem = "{$dados->foto}p.jpg"; 
+                        $imagemg = "{$dados->foto}g.jpg";
 
                         foreach ($dados as $key => $value) {
 
@@ -53,11 +53,11 @@
                                 $tipo  = "Novo";
                             }
 
-                            $dataCor = callAPI('GET','http://192.168.0.105:8080/api/cor/'.$value->id_cor)['data'];
+                            $dataCor = callAPI('GET','http://172.19.160.1:8080/api/cor/'.$value->id_cor)['data'];
                             //$dataCor = callAPI('GET','http://192.168.8.157:8080/api/cor/'.$value->id_cor)['data'];
                             $cor = $dataCor->cor;
 
-                            $dataMarca = callAPI('GET','http://192.168.0.105:8080/api/marca/'.$value->id_marca)['data'];
+                            $dataMarca = callAPI('GET','http://172.19.160.1:8080/api/marca/'.$value->id_marca)['data'];
                             //$dataMarca = callAPI('GET','http://192.168.8.157:8080/api/marca/'.$value->id_marca)['data'];
                             $marca = $dataMarca->marca;
 
@@ -74,8 +74,8 @@
                                 <td><?=$value->ano_fabricacao?></td>
                                 <td>R$ <?=$valor?></td>
                                 <td>
-                                    <a href="<?=$imagemg?>" data-lightbox="foto" title="<?=$dados->produto?>">
-                                        <img src="<?=$imagem?>" alt="<?=$dados->produto?>" width="100px">
+                                    <a href="<?=$imagemg?>" data-lightbox="foto" title="<?=$value->modelo?>">
+                                        <img src="<?=$imagem?>" alt="<?=$value->modelo?>" width="100px">
                                     </a>
                                 </td>
                                 <td>

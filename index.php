@@ -94,8 +94,6 @@ session_start(); //iniciando uma sessão
 		} else {
 			include "paginas/erro.php";
 		}
-
-
 	?>
 </main>
 

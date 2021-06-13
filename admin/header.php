@@ -36,69 +36,7 @@
                     </div>
                 </div>
             </li>
-            <!-- Nav Item - Pages Collapse Menu -->
-            <!--<li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-plus"></i>
-                    <span>Cadastros</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">-->
-                        <?php
-                            //include "libs/docs.php";
-
-                            //$sql = "select * from menu where submenu = 'C'order by nome";
-                            //$consulta = $pdo->prepare($sql);
-                            //$consulta->execute();
-
-                            //while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
-
-                                //$acesso = acesso($pdo, $dados->tabela);
-                                //if ( $acesso == "S" ) {
-                                //?>
-                                <!--<a class="collapse-item" href="<//$dados->url?>"><i class="<//$dados->icone?>"></i> <//$dados->nome?></a>
-                                <?php
-                                //}
-
-                            //}
-                        ?>
-                    </div>
-                </div>
-            </li>
-
-            <!--Nav Item - Utilities Collapse Menu -->
-            <!--<li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-shopping-cart"></i>
-                    <span>Processos</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <?php
- 
-                            /*$sql = "select * from menu where submenu = 'P' 
-                                order by nome";
-                            $consulta = $pdo->prepare($sql);
-                            $consulta->execute();
-
-                            while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
-
-                                $acesso = acesso($pdo, $dados->tabela);
-                                if ( $acesso == "S" ) {
-                                ?>
-                                <a class="collapse-item" href="<?=$dados->url?>"><i class="<?=$dados->icone?>"></i> <?=$dados->nome?></a>
-                                <?php
-                                }
-
-                            }*/
-                        ?>
-                    </div>
-                </div>
-            </li>-->
-
+            
             <!-- Divider -->
             <hr class="sidebar-divider">
 
