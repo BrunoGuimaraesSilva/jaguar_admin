@@ -34,20 +34,30 @@ session_start(); //iniciando uma sessão
 
     <div class="collapse navbar-collapse" id="menu">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="veiculos.php">
+        <!--<li class="nav-item">
+          <a class="nav-link" href="index.php?pagina=veiculos">
           <strong>Veículos</strong>
         </a>
+        </li>-->
+
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+            <strong>Veículos</strong>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="index.php?pagina=veiculosnovos">Novos</a></li>
+            <li><a class="dropdown-item" href="index.php?pagina=veiculosseminovos">Seminovos</a></li>
+          </ul>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="vendasfinanc.php">
+          <a class="nav-link" href="index.php?pagina=vendasfinanc">
           <strong>Vendas e Financiamento</strong>
         </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="ofertas.php">
+          <a class="nav-link" href="index.php?pagina=ofertas">
           <strong>Ofertas</strong>
         </a>
         </li>
@@ -58,15 +68,6 @@ session_start(); //iniciando uma sessão
         </a>
         </li>
       </ul>
-
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a href="index.php?pagina=login" class="nav-link">
-            <i class="fas fa-user"></i>
-          </a>
-        </li>
-      </ul>
-
 
       <form class="form-inline my-2 my-lg-0" name="formBusca">
         <input class="form-control mr-sm-2" type="search" placeholder="Palavra-chave" aria-label="Search" name="busca">
@@ -105,6 +106,17 @@ session_start(); //iniciando uma sessão
       <strong>Retire seu Carro na Hora! - Fone (44) 3663-9823</strong>
     </p>
     <hr>
+    <div class="container my-auto">
+      <div class="copyright text-center my-auto">
+          <span>Copyright &copy; Jaguar Motors <?=date("Y")?></span>
+      </div>
+    </div>
+    <br/>
+    <div class="text-center">
+      <img src="images/marcas.png"  alt="marcas">
+    </div>  
+    <br/>
+    <p class="text-center" style="font-size: 12px;">Desenvolvido por: Bruno Gabriel da Silva e Bruno Guimarães da Silva</p>
   </div>
 </footer>
 </body>

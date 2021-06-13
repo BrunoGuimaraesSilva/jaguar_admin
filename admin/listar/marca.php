@@ -28,8 +28,8 @@
             <tbody>
                 <?php
                     include "libs/api.php";
-                    $dados = callAPI('GET','http://192.168.8.157:8080/api/marca')['data'];
-                    //$dados = callAPI('GET','http://192.168.0.105:8080/api/marca')['data'];
+                    //$dados = callAPI('GET','http://192.168.8.157:8080/api/marca')['data'];
+                    $dados = callAPI('GET','http://192.168.0.105:8080/api/marca')['data'];
 
                     foreach ($dados as $key => $value) {
                         

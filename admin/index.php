@@ -81,17 +81,20 @@
         
         //verificar se o parametro existe em $_GET
         if ( isset ( $_GET['param'] ) ) {
+        
+            if ($_GET['param'] == "index.html") {
+                $pagina = "paginas/home.php";
+            } else {
+                //recuperar o parametro
+                $param = trim ( $_GET['param'] );
+                //explode
+                $param = explode("/", $param);
 
-            //recuperar o parametro
-            $param = trim ( $_GET['param'] );
-            //explode
-            $param = explode("/", $param);
-
-            $pasta = $param[0];
-            $arquivo = $param[1];
-            $id = $param[2] ?? NULL;
-            $pagina = "{$pasta}/{$arquivo}.php"; 
-
+                $pasta = $param[0];
+                $arquivo = $param[1];
+                $id = $param[2] ?? NULL;
+                $pagina = "{$pasta}/{$arquivo}.php"; 
+            }
         }
 
         include $pagina;

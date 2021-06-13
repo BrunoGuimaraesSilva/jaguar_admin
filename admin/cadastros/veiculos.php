@@ -4,11 +4,13 @@
     $modelo = $anomodelo = $anofabricacao = $valor = $imagem = $id_marca = $id_cor =  $id_tipo = NULL;
 
 	include "libs/api.php";
+	include "libs/docs.php";
 
     //select para edição
     if ( !empty ( $id ) ) {
 
-		$dados = callAPI('GET','http://192.168.0.105:8080/api/veiculo/'.$id)['data'];  
+		$dados = callAPI('GET','http://192.168.0.105:8080/api/veiculo/'.$id)['data']; 
+		//$dados = callAPI('GET','http://192.168.8.157:8080/api/veiculo/'.$id)['data'];   
     
         //recuperar os dados
         $modelo = $dados->modelo;
@@ -50,8 +52,8 @@
 					<input type = "year" name="anomodelo" id="anomodelo" class="form-control" required data-parsley-required-message="Digite o ano do modelo" rows="10"><?=$anomodelo?></input>
 				</div>
 				<div class="col-12 col-md-2">
-					<label for="anofabricação">Ano de Fabricação:</label>
-					<input type = "year" name="anofabricação" id="anofabricação" class="form-control" required data-parsley-required-message="Digite o ano de  fabricação" rows="10"><?=$anofabricacao?></input>
+					<label for="anofabricacao">Ano de Fabricação:</label>
+					<input type="year" name="anofabricacao" id="anofabricacao" class="form-control" required data-parsley-required-message="Digite o ano de fabricação" rows="10"><?=$anofabricacao?></input>
 				</div>
 				<div class="col-12 col-md-2">
 					<label for="valor">Valor do Veículo:</label>
@@ -74,6 +76,7 @@
 						<option value=""></option>
 						<?php
 							$dados = callAPI('GET','http://192.168.0.105:8080/api/marca')['data'];
+							//$dados = callAPI('GET','http://192.168.8.157:8080/api/marca')['data'];
 				
 							foreach ($dados as $key => $value) {
 								echo "<option value='{$value->id}'>{$value->marca}</option>";
@@ -87,6 +90,7 @@
 						<option value=""></option>
 						<?php
 							$dados = callAPI('GET','http://192.168.0.105:8080/api/cor')['data'];
+							//$dados = callAPI('GET','http://192.168.8.157:8080/api/cor')['data'];
 
 							foreach ($dados as $key => $value) {
 								echo "<option value='{$value->id}'>{$value->cor}</option>";
@@ -97,13 +101,13 @@
 				<div class="col-12 col-md-4">
 					<?php
 
-						$required = ' required data-parsley-required-message="Selecione um arquivo" ';
+						$required = 'required data-parsley-required-message="Selecione um arquivo"';
 						$link = NULL;
 
 						//verificar se a imagem não esta em branco
 						if ( !empty ( $imagem ) ) {
 							//caminho para a imagem
-							$img = "../produtos/{$imagem}m.jpg";
+							$img = "../veiculos/{$imagem}m.jpg";
 							//criar um link para abrir a imagem
 							$link = "<a href='{$img}' data-lightbox='foto' class='badge badge-success'>Abrir imagem</a>";
 							$required = NULL;

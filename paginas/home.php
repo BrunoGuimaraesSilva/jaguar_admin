@@ -52,6 +52,33 @@
       </div>
 <br/>
 	<h1 class="text-center">Veículos Novos:</h1>
+  <div class="row">
+  <br/>
+  <?php
+    include "libs/api.php";
+    //$dados = callAPI('GET','http://192.168.8.157:8080/api/cor')['data'];
+    $dados = callAPI('GET','http://192.168.0.105:8080/api/veiculo')['data'];
+
+    foreach ($dados as $key => $value) {
+      $valor = "R$ " . number_format($value->valor, 2, ",", ".");
+
+      if ($value->id_tipo == 1) {
+        echo "<div class='col-12 col-md-3 text-center'>
+          <img src='veiculos{$imagem}p.jpg' alt='{$produto}' class='w-100'>
+          <h2>{$value->modelo}</h2>
+          <p>{$valor}</p>
+          <p>
+            <a href='index.php?pagina=veiculo&id={$value->id}'>
+              Mais Detalhes
+            </a>
+          </p>
+        </div>";
+      }
+    }
+
+  ?>
+  </div>
+
 	<!--<div class="row">
 		
 		 PHP //selecionar 6 produtos - rand -> sorteio - limit limitar o nr de resultado
@@ -102,4 +129,29 @@
 <br/>	
 <div>
 	<h1 class="text-center">Veículos Seminovos:</h1>
+</div>
+<div class="row">
+<br/>
+<?php
+  //$dados = callAPI('GET','http://192.168.8.157:8080/api/cor')['data'];
+  $dados = callAPI('GET','http://192.168.0.105:8080/api/veiculo')['data'];
+
+  foreach ($dados as $key => $value) {
+    $valor = "R$ " . number_format($value->valor, 2, ",", ".");
+
+    if ($value->id_tipo == 0) {
+      echo "<div class='col-12 col-md-3 text-center'>
+        <img src='veiculos{$imagem}p.jpg' alt='{$produto}' class='w-100'>
+        <h2>{$value->modelo}</h2>
+        <p>{$valor}</p>
+        <p>
+          <a href='index.php?pagina=veiculo&id={$value->id}'>
+            Mais Detalhes
+          </a>
+        </p>
+      </div>";
+    }  
+  }
+
+?>
 </div>

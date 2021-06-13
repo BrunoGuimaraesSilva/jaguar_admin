@@ -21,22 +21,25 @@ if ($_POST) {
 
 	include "libs/api.php";
 
-	$dados = callAPI('GET', 'http://192.168.8.157:8080/api/login')['data'][0];
+	//$dados = callAPI('GET', 'http://192.168.8.157:8080/api/login')['data'][0];
+	$dados = callAPI('GET', 'http://192.168.0.105:8080/api/login')['data'];
 
-	if ($dados->login == $login && $dados->senha == $senha) {
-		$id = $dados->id;
-		$dadosUsuario = callAPI('GET', 'http://192.168.8.157:8080/api/usuario/' . $id);
-		if (!$dadosUsuario['status'] == 200) {
-			echo "<script>alert('Usuário incorreto');history.back();</script>";
-			exit;
-		}
-	} else {
-		echo "<script>alert('Usuário ou senha incorreta');history.back();</script>";
-		exit;
+	
+	foreach ($dados as $key => $value) {
+
+		if ($value->login == $login && $value->senha == $senha) {
+			$id = $value->id;
+			//$dadosUsuario = callAPI('GET', 'http://192.168.8.157:8080/api/usuario/' . $id);
+			$dadosUsuario = callAPI('GET', 'http://192.168.0.105:8080/api/usuario/' . $id);
+			
+			if (!$dadosUsuario['status'] == 200) {
+				echo "<script>alert('Usuário incorreto');history.back();</script>";
+				exit;
+			}
+		}	
 	}
 
-
-	$_SESSION["jaguar"] = array("id" => $dados->id, "login" => $dados->login, "nome" => $dadosUsuario["data"]->nome);
+	$_SESSION["jaguar"] = array("id" => $id,"id_usuario" => $dadosUsuario["data"]->id_usuario, "login" => $login, "nome" => $dadosUsuario["data"]->nome, "sobrenome" => $dadosUsuario["data"]->sobrenome);
 	//redirecionar para uma tela home
 	header("Location: paginas/home");
 

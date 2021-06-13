@@ -3,37 +3,46 @@
 
     if ( $_POST ) {
 
+        include "libs/docs.php";
         include "libs/imagem.php";
+        include "libs/api.php";
 
     	foreach ($_POST as $key => $value) {
-    		//echo "<p>{$key} - {$value}</p>";
     		$$key = trim ( $value );
     	}
+        
+        
+    	if (empty($modelo)) {
+    	    mensagem("Erro ao salvar","Preencha o campo modelo","error");
+        } else if (empty($id_marca)) {
+    	    mensagem("Erro ao salvar","Preencha o campo da marca","error");
+        } else if (empty($id_cor)) {
+    	    mensagem("Erro ao salvar","Preencha o campo da cor","error");
+        } else if (empty($anomodelo)) {
+    	    mensagem("Erro ao salvar","Preencha o campo ano do modelo","error");
+        } else if (empty($anofabricacao)) {
+    	    mensagem("Erro ao salvar","Preencha o campo ano de fabricação","error");
+        } else if (empty($valor)) {
+    	    mensagem("Erro ao salvar","Preencha o campo valor","error");
+        }
 
-    	if ( empty ( $produto ) ) {
-    	    mensagem("Erro ao salvar", "Preencha o campo produto", "error");
-    	} else if ( empty ( $descricao ) ) {
-     		mensagem("Erro ao salvar","Preencha o campo descrição","error");
-    	}
+    	//echo formatarValor($valor);
 
-    	/*echo formatarValor($valor);
-
-    	$v = "1.456,98";
+    	/*$v = "1.456,98";
     	echo "<br>".formatarValor($v);
 
     	echo "<br>".formatarValor('1.672,91');*/
 
     	$valor = formatarValor($valor);
-    	$promo = formatarValor($promo);
 
         //programação para copiar uma imagem
         //no insert envio da foto é obrigatório
         //no update só se for selecionada uma nova imagem
 
-        //print_r ( $_FILES );
+        
 
         //se o id estiver em branco e o imagem tbém - erro
-        if ( ( empty ( $id ) ) and ( empty ( $_FILES['imagem']['name'] ) ) ) {
+        /*if ( ( empty ( $id ) ) and ( empty ( $_FILES['imagem']['name'] ) ) ) {
             mensagem("Erro ao enviar imagem","Selecione um arquivo JPG válido","error");
         } 
 
@@ -44,81 +53,94 @@
             $t = 8 * 1024 * 1024; //byte - kbyte - megabyte
 
             $imagem = time();
-            $usuario = $_SESSION['submarino']['id'];
+            $usuario = $_SESSION['jaguar']['id_usuario'];
 
             //definir um nome para a imagem
-            $imagem = "produto_{$imagem}_{$usuario}";
+            $imagem = "veiculo_{$imagem}_{$usuario}";
 
             //echo "<p>{$imagem}</p>"; exit;
 
             //validar se é jpg
             if ( $_FILES['imagem']['type'] != 'image/jpeg' ) {
-                mensagem("Erro ao enviar imagem", 
-                "O arquivo enviado não é um JPG válido, selecione um arquivo JPG", 
-                "error");
+                mensagem("Erro ao enviar imagem","O arquivo enviado não é um JPG válido, selecione um arquivo JPG","error");
             } else if ( $tamanho > $t ) {
-                mensagem("Erro ao enviar imagem", 
-                "O arquivo é muito grande e não pode ser enviado. Tente arquivos menores que 8 MB", 
-                "error");
-            } else if ( !copy ( $_FILES['imagem']['tmp_name'], '../produtos/'.$_FILES['imagem']['name'] ) ) {
-                mensagem("Erro ao enviar imagem", 
-                "Não foi possível copiar o arquivo para o servidor", 
-                "error");
+                mensagem("Erro ao enviar imagem","O arquivo é muito grande e não pode ser enviado. Tente arquivos menores que 8 MB","error");
+            } else if ( !copy ( $_FILES['imagem']['tmp_name'], '../veiculos/'.$_FILES['imagem']['name'] ) ) {
+                mensagem("Erro ao enviar imagem","Não foi possível copiar o arquivo para o servidor","error");
             }
 
             //redimensionar a imagem
-            $pastaFotos = '../produtos/';
+            $pastaFotos = '../veiculos/';
             loadImg($pastaFotos.$_FILES['imagem']['name'], $imagem, $pastaFotos);
+            echo($imagem);exit;
 
-        } //fim da verificação da foto
+        } //fim da verificação da foto*/
 
         //se vai dar insert ou update
         if ( empty ( $id ) ) {
 
-            $sql = "insert into produto values( NULL, :produto, :descricao, :valor, :promo, :imagem, :ativo, :categoria_id )";
-            $consulta = $pdo->prepare($sql);
-            $consulta->bindParam(':produto', $produto);
-            $consulta->bindParam(':descricao', $descricao);
-            $consulta->bindParam(':valor', $valor);
-            $consulta->bindParam(':promo', $promo);
-            $consulta->bindParam(':imagem', $imagem);
-            $consulta->bindParam(':ativo', $ativo);
-            $consulta->bindParam(':categoria_id', $categoria_id);
+            $arraydados=array(
+                "id_marca"=>$id_marca,
+                "id_cor"=>$id_cor,
+                "modelo"=>$modelo,
+                "ano_modelo"=>$anomodelo,
+                "ano_fabricacao"=>$anofabricacao,
+                "valor"=>$valor,
+                "id_usuario"=>$_SESSION['jaguar']['id_usuario'],
+                "foto"=>"imagens/opala",
+                "id_tipo"=>$id_tipo
+            );
 
+            //$sql = "insert into produto values( NULL, :produto, :descricao, :valor, :promo, :imagem, :ativo, :categoria_id )";
+            $dados = callAPI('POST','http://192.168.0.105:8080/api/veiculo', $arraydados);
+            //$dados = callAPI('POST','http://192.168.8.157:8080/api/veiculo', $arraydados);
+            
         } else if ( empty ( $imagem ) ) {
 
-            $sql = "update produto set produto = :produto, descricao = :descricao, valor = :valor, promo = :promo, ativo = :ativo, categoria_id = :categoria_id where id = :id limit 1";
-            $consulta = $pdo->prepare($sql);
-            $consulta->bindParam(':produto', $produto);
-            $consulta->bindParam(':descricao', $descricao);
-            $consulta->bindParam(':valor', $valor);
-            $consulta->bindParam(':promo', $promo);
-            $consulta->bindParam(':ativo', $ativo);
-            $consulta->bindParam(':categoria_id', $categoria_id);
-            $consulta->bindParam(':id', $id);
+            $data = callAPI('GET','http://192.168.0.105:8080/api/veiculo'.$id,)["data"];
+            $imagem = $data->foto;
 
+            print_r($data);exit;
+
+            $arraydados = array(
+                "id_marca"=>$id_marca,
+                "id_cor"=>$id_cor,
+                "modelo"=>$modelo,
+                "ano_modelo"=>$anomodelo,
+                "ano_fabricacao"=>$anofabricacao,
+                "valor"=>$valor,
+                "id_usuario"=>$_SESSION['jaguar']['id_usuario'],
+                "foto"=>$imagem,
+                "id_tipo"=>$id_tipo
+            );
+
+            $dados = callAPI('PUT','http://192.168.0.105:8080/api/veiculo/'.$id, $arraydados);
+            //$sql = "update produto set produto = :produto, descricao = :descricao, valor = :valor, promo = :promo, ativo = :ativo, categoria_id = :categoria_id where id = :id limit 1";
+         
         } else {
 
-            $sql = "update produto set produto = :produto, descricao = :descricao, valor = :valor, promo = :promo, imagem = :imagem, ativo = :ativo, categoria_id = :categoria_id where id = :id limit 1";
-            $consulta = $pdo->prepare($sql);
-            $consulta->bindParam(':produto', $produto);
-            $consulta->bindParam(':descricao', $descricao);
-            $consulta->bindParam(':valor', $valor);
-            $consulta->bindParam(':promo', $promo);
-            $consulta->bindParam(':imagem', $imagem);
-            $consulta->bindParam(':ativo', $ativo);
-            $consulta->bindParam(':categoria_id', $categoria_id);
-            $consulta->bindParam(':id', $id);
+            $arraydados = array(
+                "id_marca"=>$id_marca,
+                "id_cor"=>$id_cor,
+                "modelo"=>$modelo,
+                "ano_modelo"=>$anomodelo,
+                "ano_fabricacao"=>$anofabricacao,
+                "valor"=>$valor,
+                "id_usuario"=>$_SESSION['jaguar']['id_usuario'],
+                "foto"=>"imagens/opala",
+                "id_tipo"=>$id_tipo
+            );
 
+            $dados = callAPI('PUT','http://192.168.0.105:8080/api/veiculo/'.$id, $arraydados);
+            print_r($dados);exit;
+            //$sql = "update produto set produto = :produto, descricao = :descricao, valor = :valor, promo = :promo, imagem = :imagem, ativo = :ativo, categoria_id = :categoria_id where id = :id limit 1";
+       
         }
 
-        //executar e verificar se foi salvo de verdade
-        if ( $consulta->execute() ) {
-            mensagem("OK","Registro salvo/alterado com sucesso!","ok");
-        } else {
-            echo $erro = $consulta->errorInfo()[2];
-            mensagem("Erro","Erro ao salvar ou alterar registro","error");
+        if ($dados["status"] == 200) {
+            mensagemLocation('Sucesso', 'Registro cadastrado com sucesso!', 'success', 'listar/veiculos');
+            exit;
         }
-
-
+        mensagemLocation('Erro','Erro ao salvar','error','listar/veiculos');
+        exit;
     }

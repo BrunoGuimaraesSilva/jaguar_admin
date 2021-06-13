@@ -8,8 +8,7 @@
 	* ao final irá apagar a imagem original
 	* ********************************** */
 
-	function loadImg($imagem, $nome, $pastaFotos)
-	{
+	function loadImg($imagem, $nome, $pastaFotos) {
 
 		//pega o tipo de imagem - jpg ou png
 		$tipo = mime_content_type($imagem);
@@ -94,7 +93,7 @@
 
 			$imagem_gerada = $pastaFotos.$nome."g.jpg";
 			$path = $imagem;
-			$imagem_orig = ImageCreateFromJPEG($path);
+			$imagem_orig = LoadJpeg($path);
 			$pontoX = ImagesX($imagem_orig);
 			$pontoY = ImagesY($imagem_orig);
 			$imagem_fin = ImageCreateTrueColor($largura, $altura);
@@ -105,7 +104,7 @@
 
 			$imagem_gerada = $pastaFotos.$nome."m.jpg";
 			$path = $imagem;
-			$imagem_orig = ImageCreateFromJPEG($path);
+			$imagem_orig = LoadJpeg($path);
 			$pontoX = ImagesX($imagem_orig);
 			$pontoY = ImagesY($imagem_orig);
 			$imagem_fin = ImageCreateTrueColor($larguram, $alturam);
@@ -116,7 +115,7 @@
 
 			$imagem_gerada = $pastaFotos.$nome."p.jpg";
 			$path = $imagem;
-			$imagem_orig = ImageCreateFromJPEG($path);
+			$imagem_orig = LoadJpeg($path);
 			$pontoX = ImagesX($imagem_orig);
 			$pontoY = ImagesY($imagem_orig);
 			$imagem_fin = ImageCreateTrueColor($largurap, $alturap);
@@ -128,4 +127,17 @@
 	
 		//apagar a imagem antiga
 		unlink ($imagem);
+	}
+	
+	function LoadJpeg($imgname) {
+		$im = @imagecreatefromjpeg($imgname);
+		if (!$im) { 
+			$im  = imagecreate(150, 30); 
+			$bgc = imagecolorallocate($im, 255, 255, 255);
+			$tc  = imagecolorallocate($im, 0, 0, 0);
+			imagefilledrectangle($im, 0, 0, 150, 30, $bgc);
+			
+			imagestring($im, 1, 5, 5, "Error loading $imgname", $tc);
+		}
+		return $im;
 	}
